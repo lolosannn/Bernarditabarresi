@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de Talles — Medí tu Número — Bernardita Barresi</title>
+<meta name="description" content="Aprendé a medir tu pie en casa y encontrá tu talle ideal antes de comprar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <div class="container">
+    <nav class="breadcrumb"><a href="index.html">Inicio</a> &gt; Guía de Talles</nav>
+  </div>
+
+  <section class="section-tight">
+    <div class="container" style="max-width:720px;">
+      <span class="eyebrow" style="display:block;text-align:center;">Medí tu número</span>
+      <h1 style="text-align:center;">¿Cómo elegir tu talle correcto?</h1>
+      <p class="section-subtitle">El miedo a errarle al número es la duda más común al comprar calzado online. Te ayudamos a resolverlo en 5 minutos.</p>
+
+      <h2>Pasos para medir tu pie en casa</h2>
+      <ol class="steps-list">
+        <li>Apoyá una hoja de papel en el piso, contra una pared, y pará descalzo/a sobre ella con el talón tocando la pared.</li>
+        <li>Marcá con un lápiz el punto más largo de tu pie (generalmente el dedo más largo).</li>
+        <li>Medí con una regla la distancia entre el borde de la hoja (talón) y la marca, en centímetros.</li>
+        <li>Repetí con el otro pie — los dos pies pueden variar levemente. Usá siempre la medida del pie más grande.</li>
+        <li>Buscá tu medida en la tabla de abajo y elegí ese talle. Ante una duda entre dos números, recomendamos el talle más grande.</li>
+      </ol>
+
+      <h2 style="margin-top:40px;">Tabla de talles (centímetros)</h2>
+      <table class="size-table">
+        <thead><tr><th>Talle AR</th><th>35</th><th>36</th><th>37</th><th>38</th><th>39</th><th>40</th></tr></thead>
+        <tbody><tr><th>Centímetros</th><td>22,5</td><td>23,2</td><td>23,9</td><td>24,6</td><td>25,3</td><td>26,0</td></tr></tbody>
+      </table>
+
+      <div class="transfer-banner" style="margin-top:20px;">
+        💡 Tip: medí tu pie a la tarde, cuando está un poco más dilatado — así te queda cómodo durante todo el día.
+      </div>
+
+      <div style="text-align:center;margin-top:44px;">
+        <p>¿Seguís con dudas sobre tu talle?</p>
+        <a id="cta-wa" class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="wa-float" class="wa-float"></div>
+<div id="site-footer"></div>
+
+<script src="assets/js/products.js"></script>
+<script src="assets/js/pixel.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/layout.js"></script>
+<script>
+  renderHeader("medi-tu-numero");
+  renderFooter();
+  document.getElementById("cta-wa").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola! Tengo una duda con mi talle 😊")}`;
+</script>
+</body>
+</html>

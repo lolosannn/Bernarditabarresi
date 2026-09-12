@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Producto — Bernardita Barresi</title>
+<meta name="description" content="Calzado de cuero genuino hecho a mano. Guía de talles y envíos a todo el país.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="index.html">Inicio</a> &gt; <a href="mujer.html">Mujer</a> &gt; <span id="crumb-name">Producto</span>
+    </nav>
+  </div>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="product-page" id="product-root"></div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-bg-alt);">
+    <div class="container">
+      <span class="eyebrow" style="display:block;text-align:center;">También te puede interesar</span>
+      <h2 class="section-title" style="text-align:center;">Combina con...</h2>
+      <div class="product-grid" id="related-grid"></div>
+    </div>
+  </section>
+</main>
+
+<div id="wa-float" class="wa-float"></div>
+<div id="site-footer"></div>
+
+<script src="assets/js/products.js"></script>
+<script src="assets/js/pixel.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/layout.js"></script>
+<script>
+  renderHeader("mujer");
+  renderFooter();
+
+  const params = new URLSearchParams(window.location.search);
+  const product = getProduct(params.get("slug")) || PRODUCTS[0];
+  let selectedColor = product.colors[0].name;
+  let selectedSize = null;
+
+  document.title = product.name + " — Bernardita Barresi";
+  document.getElementById("page-title").textContent = product.name + " — Bernardita Barresi";
+  document.getElementById("crumb-name").textContent = product.name;
+
+  function renderProduct() {
+    const root = document.getElementById("product-root");
+    const availableSizes = product.sizes.filter((s) => product.stock[s]).length;
+
+    root.innerHTML = `
+      <div>
+        <div class="gallery-main" id="gallery-main"></div>
+        <div class="gallery-thumbs" id="gallery-thumbs"></div>
+      </div>
+      <div>
+        <div class="product-title-row">
+          <span class="eyebrow">${product.category}</span>
+          <h1>${product.name}</h1>
+        </div>
+        <div class="price-row">
+          <span class="price">${formatPrice(product.price)}</span>
+        </div>
+        <div class="product-price-transfer" style="font-size:0.9rem;margin-bottom:14px;">
+          ${formatPrice(Math.round(product.price * 0.9))} pagando por transferencia (10% OFF)
+        </div>
+        <div class="stock-status">${ICONS.check} ${availableSizes > 0 ? "En stock — listo para enviar" : "Sin stock temporalmente"}</div>
+
+        <p style="color:var(--color-text-muted);">${product.description}</p>
+
+        <div class="option-group">
+          <div class="option-label"><span>Color: <strong id="color-label">${selectedColor}</strong></span></div>
+          <div class="color-options" id="color-options"></div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-label">
+            <span>Talle</span>
+            <button data-open-modal="modal-size-guide">${ICONS.ruler} ¿Qué talle uso?</button>
+          </div>
+          <div class="size-options" id="size-options"></div>
+          <div class="notify-link" id="notify-link" style="display:none;">
+            <a href="#" id="notify-cta" class="link-underline">Avisame cuando esté disponible este talle</a>
+          </div>
+        </div>
+
+        <div class="product-cta">
+          <button class="btn btn-primary btn-lg btn-block" id="add-to-cart-btn">${ICONS.bag} Agregar al carrito</button>
+        </div>
+
+        <ul class="product-trust">
+          <li>${ICONS.truck}<span>Envío a todo el país</span></li>
+          <li>${ICONS.refresh}<span>Primer cambio gratis</span></li>
+          <li>${ICONS.shield}<span>Pago seguro</span></li>
+        </ul>
+
+        <div class="accordion" id="product-accordion">
+          <div class="accordion-item" data-open="true">
+            <button class="accordion-trigger">Detalles y materiales <span class="chevron">${chevron()}</span></button>
+            <div class="accordion-panel" style="max-height:400px;">
+              <div class="accordion-panel-inner">
+                <p><strong>Material:</strong> ${product.material}</p>
+                <p><strong>Forrería:</strong> ${product.forrado}</p>
+                <p><strong>Suela:</strong> ${product.suela}</p>
+                <p><strong>Altura del taco:</strong> ${product.taco}</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger">Guía de talles <span class="chevron">${chevron()}</span></button>
+            <div class="accordion-panel">
+              <div class="accordion-panel-inner">
+                <p>Medí tu pie en casa y elegí el talle ideal.</p>
+                <button class="link-underline" data-open-modal="modal-size-guide" style="background:none;border:none;padding:0;">Ver guía completa de talles</button>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger">Envíos y cambios <span class="chevron">${chevron()}</span></button>
+            <div class="accordion-panel">
+              <div class="accordion-panel-inner">
+                <p>Enviamos a todo el país con Correo Argentino. El costo y tiempo de envío se calculan según tu ubicación.</p>
+                <p>Tu primer cambio es gratis dentro de los 30 días de recibido el producto. <a href="cambios.html" class="link-underline">Ver política completa</a>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wa-inline">
+          ${ICONS.whatsapp}
+          <span>¿Dudas con este modelo o con tu talle? <a href="#" id="wa-inline-link" class="link-underline" target="_blank" rel="noopener">Consultanos por WhatsApp</a></span>
+        </div>
+      </div>
+    `;
+
+    // Gallery
+    const images = [
+      { tag: "Foto producto", ar: "4/5" },
+      { tag: "Foto detalle", ar: "4/5" },
+      { tag: "Foto lifestyle", ar: "4/5" },
+    ];
+    document.getElementById("gallery-main").innerHTML = phMedia({ hue: product.hue, ar: "4/5", tag: images[0].tag });
+    document.getElementById("gallery-thumbs").innerHTML = images
+      .map((img, i) => `<div class="ph-media-wrap" data-idx="${i}">${phMedia({ hue: product.hue, ar: "1/1", tag: "" })}</div>`)
+      .join("");
+    document.querySelectorAll("#gallery-thumbs > div").forEach((el, i) => {
+      el.querySelector(".ph-media").classList.toggle("active", i === 0);
+      el.addEventListener("click", () => {
+        document.getElementById("gallery-main").innerHTML = phMedia({ hue: product.hue, ar: "4/5", tag: images[i].tag });
+        document.querySelectorAll("#gallery-thumbs .ph-media").forEach((t) => t.classList.remove("active"));
+        el.querySelector(".ph-media").classList.add("active");
+      });
+    });
+
+    // Colors
+    document.getElementById("color-options").innerHTML = product.colors
+      .map(
+        (c) =>
+          `<button class="color-swatch" style="background:${c.hex}" aria-pressed="${c.name === selectedColor}" data-color="${c.name}" aria-label="${c.name}"></button>`
+      )
+      .join("");
+    document.querySelectorAll(".color-swatch").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        selectedColor = btn.dataset.color;
+        document.getElementById("color-label").textContent = selectedColor;
+        document.querySelectorAll(".color-swatch").forEach((b) => b.setAttribute("aria-pressed", "false"));
+        btn.setAttribute("aria-pressed", "true");
+      });
+    });
+
+    // Sizes
+    document.getElementById("size-options").innerHTML = product.sizes
+      .map((s) => {
+        const inStock = product.stock[s];
+        return `<button class="size-option" data-size="${s}" ${inStock ? "" : "disabled"} aria-pressed="false">${s}</button>`;
+      })
+      .join("");
+    document.querySelectorAll(".size-option").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (btn.disabled) return;
+        selectedSize = Number(btn.dataset.size);
+        document.querySelectorAll(".size-option").forEach((b) => b.setAttribute("aria-pressed", "false"));
+        btn.setAttribute("aria-pressed", "true");
+        document.getElementById("notify-link").style.display = "none";
+      });
+    });
+
+    const waMsg = encodeURIComponent(`Hola! Tengo una consulta sobre el ${product.name} 😊`);
+    document.getElementById("wa-inline-link").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
+
+    document.getElementById("add-to-cart-btn").addEventListener("click", () => {
+      if (!selectedSize) {
+        showToast("Elegí un talle antes de continuar");
+        document.getElementById("notify-link").style.display = "block";
+        const notifyMsg = encodeURIComponent(`Hola! Quiero que me avisen cuando tengan stock del ${product.name} en mi talle.`);
+        document.getElementById("notify-cta").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${notifyMsg}`;
+        return;
+      }
+      addToCart(product, selectedColor, selectedSize, 1);
+    });
+
+    document.querySelectorAll(".accordion-trigger").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const item = btn.closest(".accordion-item");
+        const panel = item.querySelector(".accordion-panel");
+        const isOpen = item.getAttribute("data-open") === "true";
+        item.setAttribute("data-open", isOpen ? "false" : "true");
+        panel.style.maxHeight = isOpen ? "0px" : panel.scrollHeight + "px";
+      });
+    });
+
+    renderStickyAdd();
+  }
+
+  function chevron() {
+    return '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>';
+  }
+
+  function renderStickyAdd() {
+    document.body.classList.add("has-sticky-add");
+    let sticky = document.querySelector(".sticky-add");
+    if (!sticky) {
+      sticky = document.createElement("div");
+      sticky.className = "sticky-add";
+      document.body.appendChild(sticky);
+    }
+    sticky.innerHTML = `
+      <span class="price">${formatPrice(product.price)}</span>
+      <button class="btn btn-primary" id="sticky-add-btn">Agregar</button>
+    `;
+    document.getElementById("sticky-add-btn").addEventListener("click", () => {
+      document.getElementById("add-to-cart-btn").click();
+    });
+  }
+
+  function relatedHTML(p) {
+    return `
+    <div class="product-card">
+      <a class="product-card-media" href="producto.html?slug=${p.slug}">
+        ${phMedia({ hue: p.hue, ar: "4/5", tag: "Foto producto" })}
+      </a>
+      <div class="product-card-body">
+        <a href="producto.html?slug=${p.slug}"><h3 class="product-name">${p.name}</h3></a>
+        <span class="product-price">${formatPrice(p.price)}</span>
+        <button class="btn btn-secondary btn-block" onclick="window.location.href='producto.html?slug=${p.slug}'">Ver producto</button>
+      </div>
+    </div>`;
+  }
+
+  renderProduct();
+  trackViewContent(product);
+  document.getElementById("related-grid").innerHTML = PRODUCTS.filter((p) => p.slug !== product.slug)
+    .slice(0, 4)
+    .map(relatedHTML)
+    .join("");
+</script>
+</body>
+</html>

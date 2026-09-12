@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto — Bernardita Barresi</title>
+<meta name="description" content="Escribinos por WhatsApp, email o completá el formulario. Estamos en Monte Grande, Buenos Aires.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <div class="container">
+    <nav class="breadcrumb"><a href="index.html">Inicio</a> &gt; Contacto</nav>
+  </div>
+
+  <section class="section-tight">
+    <div class="container" style="text-align:center;">
+      <span class="eyebrow">Estamos para ayudarte</span>
+      <h1>Contacto</h1>
+      <p class="section-subtitle">¿Dudas con un modelo, tu talle o tu pedido? Escribinos, te respondemos a la brevedad.</p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container contact-grid">
+      <div>
+        <h2>Envianos un mensaje</h2>
+        <!-- TODO: conectar este formulario a un servicio real (Formspree, EmailJS, backend propio) para que los mensajes lleguen por email sin pasar a spam -->
+        <form id="contact-form">
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Mensaje</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Enviar mensaje</button>
+          <p class="form-note">Al enviar este formulario, también podés escribirnos directamente por WhatsApp para una respuesta más rápida.</p>
+        </form>
+      </div>
+
+      <div>
+        <div class="contact-info-card">
+          <h3 style="margin-bottom:18px;">Datos de contacto</h3>
+          <ul>
+            <li><span><strong>Teléfono / WhatsApp</strong><br>11 6107-1330</span></li>
+            <li><span><strong>Email</strong><br>bernarditabarresishoes@gmail.com</span></li>
+            <li><span><strong>Dirección</strong><br>Anacleto Rojas 166, Monte Grande, Buenos Aires</span></li>
+            <li><span><strong>Horario de atención</strong><br>Lunes a viernes de 10 a 18 hs</span></li>
+          </ul>
+          <a id="cta-wa" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener" style="margin-top:10px;">Escribinos por WhatsApp</a>
+        </div>
+        <div class="split-media" style="margin-top:24px;" id="map-placeholder"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="wa-float" class="wa-float"></div>
+<div id="site-footer"></div>
+
+<script src="assets/js/products.js"></script>
+<script src="assets/js/pixel.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/layout.js"></script>
+<script>
+  renderHeader("contacto");
+  renderFooter();
+
+  const infoIcons = [ICONS.phone, ICONS.mail, ICONS.pin, ICONS.clock];
+  document.querySelectorAll(".contact-info-card li").forEach((li, i) => {
+    li.insertAdjacentHTML("afterbegin", infoIcons[i]);
+  });
+
+  document.getElementById("cta-wa").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola! Quería hacerles una consulta 😊")}`;
+  document.getElementById("map-placeholder").innerHTML = phMedia({ hue: ["#ddd2c4", "#8c7157"], ar: "4/3", tag: "Mapa — Monte Grande" });
+
+  document.getElementById("contact-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    showToast("¡Gracias! Te vamos a responder a la brevedad.");
+    e.target.reset();
+  });
+</script>
+</body>
+</html>

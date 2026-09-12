@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Cambios y Devoluciones — Bernardita Barresi</title>
+<meta name="description" content="Tu primer cambio es gratis. Conocé cómo funciona la política de cambios y devoluciones de Bernardita Barresi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <div class="container">
+    <nav class="breadcrumb"><a href="index.html">Inicio</a> &gt; Política de Cambios</nav>
+  </div>
+
+  <section class="section-tight">
+    <div class="container" style="text-align:center;">
+      <span class="eyebrow">Comprá tranquila/o</span>
+      <h1>¡Tu primer cambio es gratis!</h1>
+      <p class="section-subtitle">Sabemos que elegir talle online genera dudas. Por eso te lo hacemos fácil.</p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container" style="max-width:760px;">
+      <h2 class="section-title" style="text-align:center;">¿Cómo pedir un cambio?</h2>
+      <ol class="steps-list">
+        <li>Escribinos por WhatsApp o a <a href="mailto:bernarditabarresishoes@gmail.com" class="link-underline">bernarditabarresishoes@gmail.com</a> dentro de los <strong>30 días corridos</strong> desde que recibiste tu pedido, indicando el número de pedido y el motivo del cambio.</li>
+        <li>El producto tiene que estar sin uso, con su caja y etiquetas originales.</li>
+        <li>Coordinamos el envío del calzado de vuelta a nuestro taller. <!-- TODO: confirmar quién paga el envío del cambio (cliente o la marca) y completar aquí --></li>
+        <li>Una vez que recibimos e inspeccionamos el producto, te enviamos el nuevo talle o modelo sin costo adicional en tu primer cambio.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-bg-alt);">
+    <div class="container" style="max-width:760px;">
+      <h2 class="section-title" style="text-align:center;">Preguntas frecuentes</h2>
+      <div id="faq"></div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container" style="text-align:center;">
+      <h2>¿Necesitás ayuda con un cambio?</h2>
+      <a id="cta-wa" class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+    </div>
+  </section>
+</main>
+
+<div id="wa-float" class="wa-float"></div>
+<div id="site-footer"></div>
+
+<script src="assets/js/products.js"></script>
+<script src="assets/js/pixel.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/layout.js"></script>
+<script>
+  renderHeader("como-comprar");
+  renderFooter();
+  document.getElementById("cta-wa").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola! Necesito ayuda con un cambio 🙋")}`;
+
+  const FAQ = [
+    { q: "¿Cuánto cuesta el primer cambio?", a: "Nada. Tu primer cambio por talle es completamente gratis." },
+    { q: "¿Puedo cambiarlo por otro modelo?", a: "Sí, siempre que esté sin uso y con etiquetas. Si hay diferencia de precio, se coordina por WhatsApp." },
+    { q: "¿Y si el producto tiene una falla de fabricación?", a: "En ese caso cubrimos el costo del envío de cambio y devolución. Escribinos con fotos del producto para agilizar el proceso." },
+    { q: "¿Hacen devolución de dinero?", a: "Priorizamos el cambio por talle o modelo. Ante casos puntuales, escribinos y lo evaluamos juntos. <!-- TODO: confirmar política real de reembolso -->" },
+  ];
+
+  document.getElementById("faq").innerHTML = FAQ.map(
+    (item, i) => `
+    <div class="accordion-item faq-item" data-open="${i === 0}">
+      <button class="accordion-trigger">${item.q} <span class="chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></span></button>
+      <div class="accordion-panel" style="${i === 0 ? "max-height:200px;" : ""}">
+        <div class="accordion-panel-inner">${item.a}</div>
+      </div>
+    </div>`
+  ).join("");
+
+  document.querySelectorAll(".accordion-trigger").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const item = btn.closest(".accordion-item");
+      const panel = item.querySelector(".accordion-panel");
+      const isOpen = item.getAttribute("data-open") === "true";
+      item.setAttribute("data-open", isOpen ? "false" : "true");
+      panel.style.maxHeight = isOpen ? "0px" : panel.scrollHeight + "px";
+    });
+  });
+</script>
+</body>
+</html>

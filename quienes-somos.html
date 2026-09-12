@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiénes Somos — Bernardita Barresi</title>
+<meta name="description" content="Conocé la historia del taller Bernardita Barresi, calzado de cuero hecho a mano en Monte Grande, Buenos Aires.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <div class="container">
+    <nav class="breadcrumb"><a href="index.html">Inicio</a> &gt; Quiénes Somos</nav>
+  </div>
+
+  <section class="section-tight">
+    <div class="container" style="text-align:center;max-width:700px;">
+      <span class="eyebrow">Nuestra historia</span>
+      <h1>Oficio, cuero y pasión por el detalle</h1>
+      <p style="color:var(--color-text-muted);font-size:1.05rem;">
+        <!-- TODO: reemplazar por la historia real, escrita en primera persona por Bernardita -->
+        Somos un taller familiar dedicado al diseño y la confección de calzado de cuero, ubicado en Monte Grande, Buenos Aires. Cada par que sale de nuestras manos lleva años de aprendizaje, cuidado y respeto por el oficio artesanal.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="story-block">
+        <div class="story-media" id="story-media-1"></div>
+        <div>
+          <span class="eyebrow">Cómo empezamos</span>
+          <h2>De la pasión por el cuero a un taller propio</h2>
+          <p style="color:var(--color-text-muted);">
+            <!-- TODO --> Todo comenzó con las ganas de crear algo con las propias manos. Con el tiempo, ese primer impulso se convirtió en un taller donde cada diseño se piensa, se corta y se cose de forma artesanal, cuidando cada detalle como si fuera el primer par.
+          </p>
+        </div>
+      </div>
+
+      <div class="story-block reverse">
+        <div class="story-media" id="story-media-2"></div>
+        <div>
+          <span class="eyebrow">Nuestro proceso</span>
+          <h2>Cuero seleccionado, corte y costura a mano</h2>
+          <p style="color:var(--color-text-muted);">
+            <!-- TODO --> Trabajamos con cuero vacuno genuino, seleccionado pieza por pieza. Cada modelo pasa por un proceso de corte, armado y costura hecho a mano en nuestro taller, lo que garantiza terminaciones prolijas y un producto que dura en el tiempo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-bg-alt);">
+    <div class="container">
+      <span class="eyebrow" style="display:block;text-align:center;">Lo que nos define</span>
+      <h2 class="section-title" style="text-align:center;">Nuestros valores</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon"></div>
+          <h3>Cuero genuino</h3>
+          <p style="color:var(--color-text-muted);">Trabajamos exclusivamente con cuero vacuno de calidad, elegido a mano.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"></div>
+          <h3>Hecho a mano</h3>
+          <p style="color:var(--color-text-muted);">Cada par pasa por manos artesanas, no por una línea de producción masiva.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"></div>
+          <h3>Atención cercana</h3>
+          <p style="color:var(--color-text-muted);">Te acompañamos en la elección del talle y del modelo, antes y después de la compra.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="text-align:center;">
+      <h2>¿Tenés dudas sobre un modelo?</h2>
+      <p class="section-subtitle">Escribinos por WhatsApp, te ayudamos a elegir el par ideal.</p>
+      <a id="cta-wa" class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+    </div>
+  </section>
+</main>
+
+<div id="wa-float" class="wa-float"></div>
+<div id="site-footer"></div>
+
+<script src="assets/js/products.js"></script>
+<script src="assets/js/pixel.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/layout.js"></script>
+<script>
+  renderHeader("quienes-somos");
+  renderFooter();
+  document.getElementById("story-media-1").innerHTML = phMedia({ hue: ["#e4ded2", "#b7ab92"], ar: "4/3", tag: "Foto del taller" });
+  document.getElementById("story-media-2").innerHTML = phMedia({ hue: ["#ddd2c4", "#8c7157"], ar: "4/3", tag: "Foto proceso artesanal" });
+  document.querySelectorAll(".value-icon")[0].innerHTML = ICONS.leaf;
+  document.querySelectorAll(".value-icon")[1].innerHTML = ICONS.shoe;
+  document.querySelectorAll(".value-icon")[2].innerHTML = ICONS.whatsapp;
+  document.getElementById("cta-wa").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola! Quería hacerles una consulta 😊")}`;
+</script>
+</body>
+</html>
