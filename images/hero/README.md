@@ -1,28 +1,39 @@
 # Fotos del hero (portada)
 
-Esta carpeta alimenta el slider a pantalla completa de la home. Mientras no pongas
-los archivos acá, cada foto se muestra como un cartel indicándote qué archivo falta
-— así podés ir viendo el sitio andando sin romper nada.
+Esta carpeta alimenta el slider a pantalla completa de la home. Las fotos acá
+**no están atadas a un modelo puntual del catálogo** — son fotos de
+estilo/ambiente para la portada. Mientras falte algún archivo, esa foto se
+muestra como un cartel indicándote qué archivo falta, así podés ir viendo el
+sitio andando sin romper nada.
 
-## Cómo nombrar los archivos
+## Fotos actuales
 
-Un par de fotos por modelo (una para desktop, una para mobile), con este nombre exacto:
+| Escena | Desktop | Mobile |
+|---|---|---|
+| Taco dorado con glitter | `taco-dorado-desktop.jpg` | `taco-dorado-mobile.jpg` |
+| Mocasín con borlas | `mocasin-borlas-desktop.jpg` | `mocasin-borlas-mobile.jpg` |
+| Botineta animal print | `botineta-animal-print-desktop.jpg` | `botineta-animal-print-mobile.jpg` |
+| Sandalia negra | `sandalia-negra-desktop.jpg` | `sandalia-negra-mobile.jpg` |
 
-```
-images/hero/friulli-desktop.jpg   images/hero/friulli-mobile.jpg
-images/hero/bolonia-desktop.jpg   images/hero/bolonia-mobile.jpg
-images/hero/lucca-desktop.jpg     images/hero/lucca-mobile.jpg
-images/hero/capri-desktop.jpg     images/hero/capri-mobile.jpg
-images/hero/verona-desktop.jpg    images/hero/verona-mobile.jpg
-images/hero/milano-desktop.jpg    images/hero/milano-mobile.jpg
-```
+Para **agregar, sacar o reordenar** fotos: editá el array `HERO_SLIDES` en
+`assets/js/hero.js` — cada línea tiene `desktop`, `mobile` y un `alt`
+descriptivo. No hace falta que el nombre del archivo coincida con nada del
+catálogo.
 
-Los nombres coinciden con los `slug` de `assets/js/products.js`. Si agregás un modelo
-nuevo al catálogo y también querés su foto en el hero, sumá su par de archivos acá y
-agregá una línea en `HERO_SLIDES` dentro de `assets/js/hero.js`.
+## Cómo encuadrar la foto (importante)
 
-¿No tenés foto para alguno de los 6, o querés menos slides? Borrá esa línea de
-`HERO_SLIDES` en `assets/js/hero.js` y listo — no hace falta que completes los 6.
+El texto y los botones del hero se apoyan **arriba** de la foto (con un velo
+oscuro que se desvanece hacia el centro), dejando la mitad inferior libre.
+Elegí o recortá las fotos para que:
+
+- El **zapato quede en la mitad inferior** del encuadre — es la zona que no
+  tapa el texto.
+- La parte de **arriba de la foto sea la más "tranquila"** (fondo, cielo,
+  ropa, pared) — ahí es donde va a quedar superpuesto el título.
+
+Si subís una foto donde el zapato queda arriba o muy centrado, el título
+puede taparlo — en ese caso avisá para ajustar el recorte (`object-position`)
+de esa foto puntual en `assets/css/style.css`.
 
 ## Tamaños recomendados
 
@@ -39,7 +50,5 @@ agregá una línea en `HERO_SLIDES` dentro de `assets/js/hero.js`.
   funciona si actualizás la referencia en `hero.js`).
 - Peso sugerido: **menos de 400 KB por foto** una vez exportada/comprimida. Son las
   primeras imágenes que carga la página — si pesan mucho, el sitio arranca lento,
-  sobre todo en 4G.
-- Si tenés las fotos en alta resolución (cámara/celular moderno), expórtalas o
-  comprimilas antes de subirlas (herramientas como squoosh.app funcionan bien y son
-  gratis).
+  sobre todo en 4G. Las fotos actuales fueron comprimidas a JPEG calidad 80
+  (quedaron entre 110 KB y 245 KB).

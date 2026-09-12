@@ -5,15 +5,17 @@
    vía <picture>, no el mismo recorte escalado). Mientras falte algún archivo
    en images/hero/, se muestra un cartel indicando qué falta en vez de un
    ícono de imagen rota.
+
+   Las fotos NO están atadas a un producto puntual del catálogo — son fotos
+   de estilo/ambiente para la portada. Para agregar o sacar una, sumá/quitá
+   una línea acá (y sus archivos en images/hero/).
    ========================================================================== */
 
 const HERO_SLIDES = [
-  { slug: "friulli", desktop: "images/hero/friulli-desktop.jpg", mobile: "images/hero/friulli-mobile.jpg" },
-  { slug: "bolonia", desktop: "images/hero/bolonia-desktop.jpg", mobile: "images/hero/bolonia-mobile.jpg" },
-  { slug: "lucca", desktop: "images/hero/lucca-desktop.jpg", mobile: "images/hero/lucca-mobile.jpg" },
-  { slug: "capri", desktop: "images/hero/capri-desktop.jpg", mobile: "images/hero/capri-mobile.jpg" },
-  { slug: "verona", desktop: "images/hero/verona-desktop.jpg", mobile: "images/hero/verona-mobile.jpg" },
-  { slug: "milano", desktop: "images/hero/milano-desktop.jpg", mobile: "images/hero/milano-mobile.jpg" },
+  { desktop: "images/hero/taco-dorado-desktop.jpg", mobile: "images/hero/taco-dorado-mobile.jpg", alt: "Taco de cuero dorado con glitter, foto de estilo" },
+  { desktop: "images/hero/mocasin-borlas-desktop.jpg", mobile: "images/hero/mocasin-borlas-mobile.jpg", alt: "Mocasín de cuero con borlas, foto de estilo" },
+  { desktop: "images/hero/botineta-animal-print-desktop.jpg", mobile: "images/hero/botineta-animal-print-mobile.jpg", alt: "Botineta de cuero animal print, foto de estilo" },
+  { desktop: "images/hero/sandalia-negra-desktop.jpg", mobile: "images/hero/sandalia-negra-mobile.jpg", alt: "Sandalia de cuero negra, foto de estilo" },
 ];
 
 const HERO_AUTOPLAY_MS = 5500;
@@ -28,12 +30,11 @@ function initHeroSlider() {
   const root = document.getElementById("hero-slider");
   if (!root) return;
 
-  const slides = HERO_SLIDES.map((s) => ({ ...s, product: getProduct(s.slug) })).filter((s) => s.product);
+  const slides = HERO_SLIDES;
   if (slides.length === 0) return;
 
   const track = root.querySelector(".hero-slider-track");
   const dotsWrap = root.querySelector(".hero-dots");
-  const tag = root.querySelector("#hero-model-tag");
   let index = 0;
   let timer = null;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -44,11 +45,11 @@ function initHeroSlider() {
     <div class="hero-slide" data-index="${i}">
       <picture>
         <source media="(max-width: 760px)" srcset="${s.mobile}">
-        <img src="${s.desktop}" alt="${s.product.name}, calzado de cuero Bernardita Barresi" ${i === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'}>
+        <img src="${s.desktop}" alt="${s.alt}" ${i === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'}>
       </picture>
-      <div class="hero-slide-fallback-bg" style="--hue-a:${s.product.hue[0]};--hue-b:${s.product.hue[1]}">${ICONS.shoe}</div>
+      <div class="hero-slide-fallback-bg">${ICONS.shoe}</div>
       <div class="hero-slide-fallback-badge">
-        <span>Falta la foto de ${s.product.name}:</span>
+        <span>Falta esta foto:</span>
         <code>${s.desktop}</code>
         <code>${s.mobile}</code>
       </div>
@@ -65,17 +66,10 @@ function initHeroSlider() {
     .join("");
   const dots = dotsWrap.querySelectorAll(".hero-dot");
 
-  function updateTag(i) {
-    if (!tag) return;
-    const p = slides[i].product;
-    tag.innerHTML = `<a href="producto.html?slug=${p.slug}">Estás viendo: ${p.name} — ${formatPrice(p.price)} →</a>`;
-  }
-
   function goTo(i) {
     index = (i + slides.length) % slides.length;
     track.style.transform = `translateX(-${index * 100}%)`;
     dots.forEach((d, di) => d.setAttribute("aria-current", di === index ? "true" : "false"));
-    updateTag(index);
   }
 
   function next() {
