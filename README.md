@@ -32,12 +32,13 @@ y entrá a `http://localhost:8000`.
 - **Carrito propio (localStorage)** con checkout asistido por WhatsApp: arma el pedido y lo manda como mensaje prellenado, sin pedir registro. Ver el punto "Sobre el checkout" más abajo.
 - **Confianza**: banner de envíos (Correo Argentino), primer cambio gratis, 10% OFF por transferencia, testimonios, historia del taller.
 - **Mobile-first**: botón de "Agregar al carrito" fijo abajo en mobile, menú hamburguesa, WhatsApp flotante con mensaje de invitación.
+- **Hero a pantalla completa**: slider de fotos en la home (`assets/js/hero.js`) con una versión desktop y una mobile por foto (art direction real vía `<picture>`, no el mismo recorte escalado). Autoplay, flechas, puntos, swipe en mobile y un cartel con el modelo/precio de la foto activa que linkea a su ficha. Ver "Fotos del hero" abajo.
 - **Meta Pixel (stub)**: `assets/js/pixel.js` ya dispara `ViewContent`, `AddToCart` e `InitiateCheckout` en los momentos correctos — falta cargar el Pixel ID real.
 
 ## TODO antes de lanzar la campaña
 
 1. **Contenido real**: reemplazar textos marcados `<!-- TODO -->` (historia de la marca, política de cambios exacta — quién paga el envío del cambio —, horarios, dirección si difiere).
-2. **Fotos reales**: todas las imágenes son placeholders (bloques con degradé e ícono). Reemplazar por fotos de producto en fondo neutro + al menos una foto de "puesto" (lifestyle) por modelo, en `assets/js/products.js` y las páginas.
+2. **Fotos reales**: todas las imágenes son placeholders (bloques con degradé e ícono). Reemplazar por fotos de producto en fondo neutro + al menos una foto de "puesto" (lifestyle) por modelo, en `assets/js/products.js` y las páginas. Para el hero de la home, ver `images/hero/README.md` (ahí está la convención de nombres y los tamaños recomendados).
 3. **Catálogo real**: cargar productos, precios, talles, stock y colores reales en `assets/js/products.js`.
 4. **Meta Pixel**: completar `PIXEL_ID` en `assets/js/pixel.js` y descomentar el snippet oficial. Evaluar sumar la API de Conversiones (Conversions API) para mejorar la calidad de los eventos — un sitio 100% estático no puede enviarla por sí solo.
 5. **Formulario de contacto**: `contacto.html` tiene un formulario que hoy no envía a ningún lado (solo muestra un mensaje de éxito). Conectarlo a un servicio como Formspree/EmailJS o a un backend propio para que llegue por email.
@@ -50,6 +51,13 @@ Este sitio **no procesa pagos ni envía emails transaccionales**, porque es un s
 
 Esto es intencional: coincide con que hoy la venta se hace de forma asistida y evita construir un backend de pagos desde cero. Si más adelante se quiere un checkout 100% self-service con cobro automático de tarjeta y emails de confirmación/tracking automáticos, conviene migrar a una plataforma de e-commerce (Tiendanube, Shopify, WooCommerce) o construir un backend con pasarela de pago — ese es un proyecto aparte.
 
+## Fotos del hero
+
+La carpeta `images/hero/` está lista para que sumes las fotos del slider de la home
+(una desktop + una mobile por modelo). Instrucciones de nombres, tamaños y peso en
+`images/hero/README.md`. Hasta que subas los archivos, cada foto se muestra como un
+cartel indicando qué archivo falta, así podés ver el sitio andando sin que se rompa.
+
 ## Estructura
 
 ```
@@ -61,10 +69,13 @@ como-comprar.html
 cambios.html
 medi-tu-numero.html
 contacto.html
+images/
+  hero/                — fotos del hero de la home (ver README ahí adentro)
 assets/
   css/style.css       — sistema de diseño (colores, tipografía, componentes)
   js/products.js       — catálogo (placeholder)
   js/layout.js         — header, footer, WhatsApp flotante
+  js/hero.js            — slider de fotos a pantalla completa de la home
   js/cart.js            — carrito (localStorage) + checkout por WhatsApp
   js/ui.js               — íconos, modal de guía de talles, menú mobile, acordeones
   js/pixel.js            — stub de Meta Pixel + eventos de conversión

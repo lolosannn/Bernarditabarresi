@@ -18,19 +18,24 @@
 
 <main>
 
-  <section class="hero">
-    <div class="container" style="display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;">
-      <div class="hero-copy">
-        <span class="eyebrow">Hecho a mano en Monte Grande</span>
+  <section class="hero-slider" id="hero-slider" aria-label="Presentación de la colección">
+    <div class="hero-slider-track"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="container">
+        <span class="eyebrow eyebrow-light">Hecho a mano en Monte Grande</span>
         <h1>Calzado de cuero, pensado para acompañarte todos los días</h1>
         <p>Sandalias, chatas y botas artesanales, elaboradas con cuero vacuno genuino. Diseño y oficio en cada par, con el respaldo de un taller familiar.</p>
         <div class="hero-cta">
           <a href="mujer.html" class="btn btn-primary btn-lg">Ver colección</a>
-          <a href="quienes-somos.html" class="btn btn-secondary btn-lg">Conocé nuestra historia</a>
+          <a href="quienes-somos.html" class="btn btn-outline-light btn-lg">Conocé nuestra historia</a>
         </div>
+        <div class="hero-model-tag" id="hero-model-tag"></div>
       </div>
-      <div class="hero-media"></div>
     </div>
+    <button class="hero-arrow hero-arrow-prev" aria-label="Foto anterior">‹</button>
+    <button class="hero-arrow hero-arrow-next" aria-label="Foto siguiente">›</button>
+    <div class="hero-dots" id="hero-dots"></div>
   </section>
 
   <section class="section-tight">
@@ -138,12 +143,13 @@
 <script src="assets/js/ui.js"></script>
 <script src="assets/js/cart.js"></script>
 <script src="assets/js/layout.js"></script>
+<script src="assets/js/hero.js"></script>
 <script>
   renderHeader("inicio");
   renderFooter();
+  initHeroSlider();
 
   document.getElementById("story-media").innerHTML = phMedia({ hue: ["#e4ded2", "#b7ab92"], ar: "4/3", tag: "Foto del taller" });
-  document.querySelector(".hero-media").innerHTML = phMedia({ hue: ["#f1ddd0", "#dba98a"], ar: "1/1", tag: "Foto lifestyle" });
   document.querySelectorAll(".trust-card")[0].insertAdjacentHTML("afterbegin", ICONS.truck);
   document.querySelectorAll(".trust-card")[1].insertAdjacentHTML("afterbegin", ICONS.leaf);
   document.querySelectorAll(".trust-card")[2].insertAdjacentHTML("afterbegin", ICONS.refresh);
