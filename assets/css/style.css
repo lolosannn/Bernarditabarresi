@@ -853,6 +853,8 @@ p { margin: 0 0 1em; }
 /* ---------- Story / quienes somos ---------- */
 .story-block { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-bottom: 64px; }
 .story-block.reverse .story-media { order: 2; }
+.story-photo { margin: 0; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); max-width: 460px; justify-self: center; width: 100%; }
+.story-photo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
 .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .value-card { text-align: center; padding: 10px; }
 .value-card svg { color: var(--color-accent-dark); margin-bottom: 10px; width: 28px; height: 28px; }
@@ -944,6 +946,7 @@ p { margin: 0 0 1em; }
 }
 
 @media (max-width: 720px) {
+  .values-grid { grid-template-columns: 1fr; gap: 28px; }
   .benefits { padding: 56px 0; }
   .benefits-grid { grid-template-columns: 1fr; gap: 16px; }
   .benefit-card { padding: 26px 22px; }

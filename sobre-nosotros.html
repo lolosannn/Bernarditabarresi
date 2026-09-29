@@ -18,20 +18,32 @@
     <nav class="breadcrumb"><a href="index.html">Inicio</a> &gt; Sobre nosotros</nav>
   </div>
 
-  <section class="section-tight">
+  <section class="section-tight" style="padding-bottom:0;">
     <div class="container" style="text-align:center;max-width:720px;">
       <span class="eyebrow">Sobre nosotros</span>
       <h1>La zapatería que siempre soñamos</h1>
-      <p style="color:var(--color-text-muted);font-size:1.1rem;">
-        Soy Fernanda Barresi. Mi marca lleva el nombre de mi hija, Bernardita. Junto a mi esposo Mariano, y en base a puro trabajo y esfuerzo, dimos vida a Bernardita Barresi: la zapatería que siempre soñamos.
-      </p>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
       <div class="story-block">
-        <div class="story-media" id="story-media-1"></div>
+        <figure class="story-media story-photo">
+          <img src="images/nosotros/fernanda-y-mariano.jpg" alt="Fernanda Barresi y su esposo Mariano" width="880" height="1188">
+        </figure>
+        <div>
+          <span class="eyebrow">Quiénes somos</span>
+          <h2>Una familia detrás de cada par</h2>
+          <p style="color:var(--color-text-muted);">
+            Soy Fernanda Barresi. Mi marca lleva el nombre de mi hija, Bernardita. Junto a mi esposo Mariano, y en base a puro trabajo y esfuerzo, dimos vida a Bernardita Barresi: la zapatería que siempre soñamos.
+          </p>
+        </div>
+      </div>
+
+      <div class="story-block reverse">
+        <figure class="story-media story-photo">
+          <img src="images/nosotros/fernanda-disenando.jpg" alt="Fernanda dibujando el diseño de un zapato en el taller" width="896" height="1191" loading="lazy">
+        </figure>
         <div>
           <span class="eyebrow">Mi historia</span>
           <h2>Una pasión de toda la vida</h2>
@@ -44,8 +56,10 @@
         </div>
       </div>
 
-      <div class="story-block reverse">
-        <div class="story-media" id="story-media-2"></div>
+      <div class="story-block">
+        <figure class="story-media story-photo">
+          <img src="images/nosotros/cartel-local.jpg" alt="Cartel iluminado de Bernardita Barresi, diseño de calzado" width="880" height="1194" loading="lazy">
+        </figure>
         <div>
           <span class="eyebrow">Cómo trabajamos</span>
           <h2>Hecho a mano, a tu medida</h2>
@@ -104,8 +118,6 @@
 <script>
   renderHeader("sobre-nosotros");
   renderFooter();
-  document.getElementById("story-media-1").innerHTML = phMedia({ hue: ["#e4ded2", "#b7ab92"], ar: "4/3", tag: "Foto del taller" });
-  document.getElementById("story-media-2").innerHTML = phMedia({ hue: ["#ddd2c4", "#8c7157"], ar: "4/3", tag: "Foto proceso artesanal" });
   document.querySelectorAll(".value-icon")[0].innerHTML = ICONS.shoe;
   document.querySelectorAll(".value-icon")[1].innerHTML = ICONS.leaf;
   document.querySelectorAll(".value-icon")[2].innerHTML = ICONS.pen;
