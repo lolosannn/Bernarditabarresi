@@ -464,6 +464,7 @@ p { margin: 0 0 1em; }
   align-items: center;
 }
 .split-media { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); }
+.split-photo { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 32%; }
 
 .trust-grid {
   display: grid;

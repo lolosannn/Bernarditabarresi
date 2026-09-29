@@ -102,7 +102,7 @@
     <div class="container">
       <div class="split">
         <div class="split-media">
-          <div id="story-media"></div>
+          <img class="split-photo" src="images/nosotros/cartel-local.jpg" alt="Cartel iluminado de Bernardita Barresi, diseño de calzado" width="880" height="1194" loading="lazy">
         </div>
         <div>
           <span class="eyebrow">Nuestra historia</span>
@@ -170,7 +170,6 @@
   renderFooter();
   initHeroSlider();
 
-  document.getElementById("story-media").innerHTML = phMedia({ hue: ["#e4ded2", "#b7ab92"], ar: "4/3", tag: "Foto del taller" });
   document.querySelectorAll(".benefit-icon[data-icon]").forEach((el) => {
     el.innerHTML = ICONS[el.dataset.icon] || "";
   });
