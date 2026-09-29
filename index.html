@@ -57,20 +57,42 @@
     </div>
   </section>
 
-  <section class="section" style="background:var(--color-bg-alt);">
+  <section class="section benefits" aria-labelledby="benefits-title">
     <div class="container">
-      <div class="trust-grid">
-        <div class="trust-card">
-          <h3>Envíos a todo el país</h3>
-          <p>Trabajamos con Correo Argentino. Recibí tu pedido en la puerta de tu casa.</p>
+      <span class="eyebrow" style="display:block;text-align:center;">Por qué elegirnos</span>
+      <h2 class="section-title" id="benefits-title">Mucho más que un par de zapatos</h2>
+      <p class="section-subtitle">Detrás de cada par hay un taller familiar, cuero de verdad y alguien que te acompaña de principio a fin.</p>
+      <div class="benefits-grid">
+        <div class="benefit-card benefit-card-featured">
+          <span class="benefit-icon" data-icon="pen"></span>
+          <h3>Diseños personalizados</h3>
+          <p>Hacemos tu par a tu medida y a tu gusto. Elegí el modelo, el color del cuero y los detalles, y lo diseñamos especialmente para vos.</p>
+          <a href="contacto.html" class="benefit-link">Quiero mi diseño →</a>
         </div>
-        <div class="trust-card">
+        <div class="benefit-card">
+          <span class="benefit-icon" data-icon="shoe"></span>
           <h3>Cuero genuino, hecho a mano</h3>
-          <p>Cada par se elabora en nuestro taller, con cuero vacuno y terminación artesanal.</p>
+          <p>Cada par se corta, se cose y se termina a mano en nuestro taller de Monte Grande, con cuero vacuno que mejora con el uso.</p>
         </div>
-        <div class="trust-card">
+        <div class="benefit-card">
+          <span class="benefit-icon" data-icon="truck"></span>
+          <h3>Envíos a todo el país</h3>
+          <p>Trabajamos con Correo Argentino. Recibí tu pedido en la puerta de tu casa, estés donde estés.</p>
+        </div>
+        <div class="benefit-card">
+          <span class="benefit-icon" data-icon="refresh"></span>
           <h3>Primer cambio gratis</h3>
-          <p>¿No es tu talle? Te lo cambiamos sin costo. Comprá tranquilo/a.</p>
+          <p>¿No es tu talle? Te lo cambiamos sin costo. Comprá tranquila.</p>
+        </div>
+        <div class="benefit-card">
+          <span class="benefit-icon" data-icon="tag"></span>
+          <h3>10% OFF por transferencia</h3>
+          <p>Pagando por transferencia bancaria tenés un 10% de descuento sobre el precio de lista.</p>
+        </div>
+        <div class="benefit-card">
+          <span class="benefit-icon" data-icon="whatsapp"></span>
+          <h3>Atención cercana por WhatsApp</h3>
+          <p>Te asesoramos con el talle, el modelo y el pago. Hablás directamente con el taller, no con un robot.</p>
         </div>
       </div>
     </div>
@@ -149,9 +171,9 @@
   initHeroSlider();
 
   document.getElementById("story-media").innerHTML = phMedia({ hue: ["#e4ded2", "#b7ab92"], ar: "4/3", tag: "Foto del taller" });
-  document.querySelectorAll(".trust-card")[0].insertAdjacentHTML("afterbegin", ICONS.truck);
-  document.querySelectorAll(".trust-card")[1].insertAdjacentHTML("afterbegin", ICONS.leaf);
-  document.querySelectorAll(".trust-card")[2].insertAdjacentHTML("afterbegin", ICONS.refresh);
+  document.querySelectorAll(".benefit-icon[data-icon]").forEach((el) => {
+    el.innerHTML = ICONS[el.dataset.icon] || "";
+  });
   document.querySelector(".social-ig").innerHTML = ICONS.instagram;
 
   const homeGrid = document.getElementById("home-products");

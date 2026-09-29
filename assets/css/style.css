@@ -496,6 +496,53 @@ p { margin: 0 0 1em; }
 .testimonial-name { font-weight: 700; margin-top: 12px; font-size: 0.88rem; }
 .testimonial-role { color: var(--color-text-muted); font-size: 0.78rem; }
 
+/* ---------- Beneficios (home) ---------- */
+.benefits { background: var(--color-bg-alt); padding: 88px 0; }
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.benefit-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 36px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.benefit-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.benefit-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--color-bg-alt);
+  color: var(--color-accent-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.benefit-icon svg { width: 28px; height: 28px; }
+.benefit-icon[data-icon="shoe"] svg { width: 34px; height: 34px; stroke-width: 2.4; }
+.benefit-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+.benefit-card p { color: var(--color-text-muted); font-size: 0.95rem; margin: 0; }
+.benefit-card-featured { background: var(--color-black); border-color: var(--color-black); }
+.benefit-card-featured .benefit-icon { background: rgba(255, 255, 255, 0.1); color: #f1e4d3; }
+.benefit-card-featured h3 { color: #fff; }
+.benefit-card-featured p { color: #cfc8ba; }
+.benefit-link {
+  margin-top: 18px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #f1e4d3;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.benefit-link:hover { color: #fff; }
+
 /* ---------- Payment / shipping strip ---------- */
 .transfer-banner {
   background: var(--color-success-bg);
@@ -888,12 +935,17 @@ p { margin: 0 0 1em; }
   .product-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .trust-grid, .testimonial-grid { grid-template-columns: 1fr; }
+  .benefits-grid { grid-template-columns: 1fr 1fr; }
   .steps-grid { grid-template-columns: 1fr 1fr; }
   .product-page { grid-template-columns: 1fr; gap: 28px; }
   .contact-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 720px) {
+  .benefits { padding: 56px 0; }
+  .benefits-grid { grid-template-columns: 1fr; gap: 16px; }
+  .benefit-card { padding: 26px 22px; }
+  .benefit-card h3 { font-size: 1.3rem; }
   .hero-arrow { display: none; }
   .hero-content { padding: 24px 16px 0; }
   .hero-content h1 { font-size: 1.7rem; margin-bottom: 0.3em; }
