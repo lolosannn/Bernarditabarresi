@@ -22,8 +22,11 @@ const HERO_AUTOPLAY_MS = 5500;
 
 function setHeroChromeHeight() {
   const header = document.getElementById("site-header");
-  if (!header) return;
-  document.documentElement.style.setProperty("--chrome-h", header.offsetHeight + "px");
+  const hero = document.getElementById("hero-slider");
+  if (!header || !hero) return;
+  // Si la barra va debajo del hero (home), el hero ocupa toda la pantalla.
+  const headerFirst = header.compareDocumentPosition(hero) & Node.DOCUMENT_POSITION_FOLLOWING;
+  document.documentElement.style.setProperty("--chrome-h", headerFirst ? header.offsetHeight + "px" : "0px");
 }
 
 function initHeroSlider() {
