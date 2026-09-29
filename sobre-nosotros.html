@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre nosotros — Bernardita Barresi</title>
+<meta name="description" content="Soy Fernanda Barresi. Conocé la historia de Bernardita Barresi, la zapatería familiar de calzado hecho íntegramente a mano y a medida.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <div class="container">
+    <nav class="breadcrumb"><a href="index.html">Inicio</a> &gt; Sobre nosotros</nav>
+  </div>
+
+  <section class="section-tight">
+    <div class="container" style="text-align:center;max-width:720px;">
+      <span class="eyebrow">Sobre nosotros</span>
+      <h1>La zapatería que siempre soñamos</h1>
+      <p style="color:var(--color-text-muted);font-size:1.1rem;">
+        Soy Fernanda Barresi. Mi marca lleva el nombre de mi hija, Bernardita. Junto a mi esposo Mariano, y en base a puro trabajo y esfuerzo, dimos vida a Bernardita Barresi: la zapatería que siempre soñamos.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="story-block">
+        <div class="story-media" id="story-media-1"></div>
+        <div>
+          <span class="eyebrow">Mi historia</span>
+          <h2>Una pasión de toda la vida</h2>
+          <p style="color:var(--color-text-muted);">
+            Siempre tuve pasión por los zapatos. Estudié en el Museo del Traje e hice la tecnicatura en diseño italiano de calzado en la escuela de San Crispín.
+          </p>
+          <p style="color:var(--color-text-muted);">
+            El resto es el resultado de muchas horas de dedicación, trabajo arduo y, sobre todo, mucho amor por lo que hacemos.
+          </p>
+        </div>
+      </div>
+
+      <div class="story-block reverse">
+        <div class="story-media" id="story-media-2"></div>
+        <div>
+          <span class="eyebrow">Cómo trabajamos</span>
+          <h2>Hecho a mano, a tu medida</h2>
+          <p style="color:var(--color-text-muted);">
+            Cada par de zapatos está realizado íntegramente a mano, con materias primas 100 % naturales y artesanales.
+          </p>
+          <p style="color:var(--color-text-muted);">
+            Nos especializamos en productos personalizados y a medida de cada una de nuestras clientas que hoy, ya son amigas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-bg-alt);">
+    <div class="container">
+      <span class="eyebrow" style="display:block;text-align:center;">Lo que nos define</span>
+      <h2 class="section-title" style="text-align:center;">Nuestros valores</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon"></div>
+          <h3>Íntegramente a mano</h3>
+          <p style="color:var(--color-text-muted);">Cada par se hace de principio a fin a mano, con el oficio aprendido en el diseño italiano de calzado.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"></div>
+          <h3>Materias primas naturales</h3>
+          <p style="color:var(--color-text-muted);">Trabajamos con materias primas 100 % naturales y artesanales.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"></div>
+          <h3>Personalizado y a medida</h3>
+          <p style="color:var(--color-text-muted);">Diseñamos cada par a la medida y al gusto de cada clienta. Por eso, más que clientas, hoy son amigas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="text-align:center;">
+      <h2>¿Tenés dudas sobre un modelo?</h2>
+      <p class="section-subtitle">Escribinos por WhatsApp, te ayudamos a elegir el par ideal.</p>
+      <a id="cta-wa" class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+    </div>
+  </section>
+</main>
+
+<div id="wa-float" class="wa-float"></div>
+<div id="site-footer"></div>
+
+<script src="assets/js/products.js"></script>
+<script src="assets/js/pixel.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/layout.js"></script>
+<script>
+  renderHeader("sobre-nosotros");
+  renderFooter();
+  document.getElementById("story-media-1").innerHTML = phMedia({ hue: ["#e4ded2", "#b7ab92"], ar: "4/3", tag: "Foto del taller" });
+  document.getElementById("story-media-2").innerHTML = phMedia({ hue: ["#ddd2c4", "#8c7157"], ar: "4/3", tag: "Foto proceso artesanal" });
+  document.querySelectorAll(".value-icon")[0].innerHTML = ICONS.shoe;
+  document.querySelectorAll(".value-icon")[1].innerHTML = ICONS.leaf;
+  document.querySelectorAll(".value-icon")[2].innerHTML = ICONS.pen;
+  document.getElementById("cta-wa").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola! Quería hacerles una consulta 😊")}`;
+</script>
+</body>
+</html>

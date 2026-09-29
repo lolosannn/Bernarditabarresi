@@ -19,7 +19,7 @@ y entrá a `http://localhost:8000`.
 | Inicio | `index.html` |
 | Catálogo Mujer | `mujer.html` |
 | Ficha de producto | `producto.html?slug=<id>` (ids en `assets/js/products.js`) |
-| Quiénes Somos | `quienes-somos.html` |
+| Sobre Nosotros | `sobre-nosotros.html` (`quienes-somos.html` redirige acá) |
 | Cómo Comprar | `como-comprar.html` |
 | Política de Cambios | `cambios.html` |
 | Guía de Talles | `medi-tu-numero.html` |
@@ -27,7 +27,7 @@ y entrá a `http://localhost:8000`.
 
 ## Qué incluye
 
-- **Menú limpio**: solo Inicio, Mujer, Quiénes Somos, Guía de Talles y Contacto. "Hombre" y "Gift Cards" se sacaron del menú porque no tenían contenido real — se pueden volver a agregar en `assets/js/layout.js` (`NAV_ITEMS`) cuando haya catálogo.
+- **Menú limpio**: solo Inicio, Mujer, Sobre Nosotros, Guía de Talles y Contacto. "Hombre" y "Gift Cards" se sacaron del menú porque no tenían contenido real — se pueden volver a agregar en `assets/js/layout.js` (`NAV_ITEMS`) cuando haya catálogo.
 - **Ficha de producto completa**: galería, selector de color/talle (con talles sin stock tachados y link de "avisame"), guía de talles en modal, detalle de materiales, trust badges, WhatsApp inline y productos relacionados.
 - **Carrito propio (localStorage)** con checkout asistido por WhatsApp: arma el pedido y lo manda como mensaje prellenado, sin pedir registro. Ver el punto "Sobre el checkout" más abajo.
 - **Confianza**: banner de envíos (Correo Argentino), primer cambio gratis, 10% OFF por transferencia, testimonios, historia del taller.
@@ -64,7 +64,7 @@ cartel indicando qué archivo falta, así podés ver el sitio andando sin que se
 index.html
 mujer.html
 producto.html
-quienes-somos.html
+sobre-nosotros.html
 como-comprar.html
 cambios.html
 medi-tu-numero.html

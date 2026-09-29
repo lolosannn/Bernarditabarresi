@@ -5,7 +5,7 @@
 const NAV_ITEMS = [
   { key: "inicio", label: "Inicio", href: "index.html" },
   { key: "mujer", label: "Mujer", href: "mujer.html" },
-  { key: "quienes-somos", label: "Quiénes Somos", href: "quienes-somos.html" },
+  { key: "sobre-nosotros", label: "Sobre Nosotros", href: "sobre-nosotros.html" },
   { key: "medi-tu-numero", label: "Guía de Talles", href: "medi-tu-numero.html" },
   { key: "contacto", label: "Contacto", href: "contacto.html" },
 ];

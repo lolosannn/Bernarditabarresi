@@ -855,7 +855,9 @@ p { margin: 0 0 1em; }
 .story-block.reverse .story-media { order: 2; }
 .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .value-card { text-align: center; padding: 10px; }
-.value-card svg { color: var(--color-accent-dark); margin-bottom: 10px; }
+.value-card svg { color: var(--color-accent-dark); margin-bottom: 10px; width: 28px; height: 28px; }
+.value-icon { display: flex; justify-content: center; }
+.value-card svg[viewBox="0 0 64 64"] { width: 34px; height: 34px; stroke-width: 2.4; }
 
 /* ---------- Steps (como comprar) ---------- */
 .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; counter-reset: st; }
