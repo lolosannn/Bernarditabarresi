@@ -26,7 +26,7 @@ function renderHeader(active) {
     <header class="site-header">
       <div class="container">
         <a class="brand" href="index.html">
-          <span class="brand-mark">B/B</span>
+          <img class="brand-mark" src="images/logo-bb.png" alt="Logo Bernardita Barresi" width="56" height="56">
           <span>
             <span class="brand-name">Bernardita Barresi</span>
             <span class="brand-sub">Calzado artesanal</span>
@@ -47,16 +47,6 @@ function renderHeader(active) {
         </div>
       </div>
     </header>
-    <div class="trust-bar">
-      <div class="container">
-        <ul>
-          <li>${ICONS.truck} Envíos a todo el país</li>
-          <li>${ICONS.leaf} Cuero 100% genuino, hecho a mano</li>
-          <li>${ICONS.refresh} Primer cambio gratis</li>
-          <li>${ICONS.tag} 10% OFF pagando por transferencia</li>
-        </ul>
-      </div>
-    </div>
   `;
 }
 
