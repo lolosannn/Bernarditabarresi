@@ -55,12 +55,15 @@
           <ul>
             <li><span><strong>Teléfono / WhatsApp</strong><br>11 6107-1330</span></li>
             <li><span><strong>Email</strong><br>bernarditabarresishoes@gmail.com</span></li>
-            <li><span><strong>Dirección</strong><br>Anacleto Rojas 166, Monte Grande, Buenos Aires</span></li>
+            <li><span><strong>Dirección</strong><br><a href="https://www.google.com/maps/search/?api=1&amp;query=Bernardita+Barresi%2C+Anacleto+Rojas+166%2C+Monte+Grande%2C+Buenos+Aires" target="_blank" rel="noopener" class="link-underline" style="font-weight:400;">Anacleto Rojas 166, Monte Grande, Buenos Aires</a></span></li>
             <li><span><strong>Horario de atención</strong><br>Lunes a viernes de 10 a 18 hs</span></li>
           </ul>
           <a id="cta-wa" class="btn btn-whatsapp btn-block" target="_blank" rel="noopener" style="margin-top:10px;">Escribinos por WhatsApp</a>
         </div>
-        <div class="split-media" style="margin-top:24px;" id="map-placeholder"></div>
+        <a class="split-media map-link" style="margin-top:24px;" href="https://www.google.com/maps/search/?api=1&amp;query=Bernardita+Barresi%2C+Anacleto+Rojas+166%2C+Monte+Grande%2C+Buenos+Aires" target="_blank" rel="noopener" aria-label="Ver la ubicación de Bernardita Barresi en Google Maps">
+          <img src="images/contacto/mapa-local.jpg" alt="Mapa de Monte Grande con la ubicación de Bernardita Barresi sobre Anacleto Rojas" width="1125" height="772" loading="lazy">
+          <span class="map-cta">Ver en Google Maps →</span>
+        </a>
       </div>
     </div>
   </section>
@@ -84,7 +87,6 @@
   });
 
   document.getElementById("cta-wa").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola! Quería hacerles una consulta 😊")}`;
-  document.getElementById("map-placeholder").innerHTML = phMedia({ hue: ["#ddd2c4", "#8c7157"], ar: "4/3", tag: "Mapa — Monte Grande" });
 
   document.getElementById("contact-form").addEventListener("submit", (e) => {
     e.preventDefault();
