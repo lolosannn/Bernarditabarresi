@@ -130,25 +130,6 @@ p { margin: 0 0 1em; }
   font-weight: 600;
 }
 
-/* ---------- Top utility bar ---------- */
-.topbar {
-  background: var(--color-black);
-  color: #eee7da;
-  font-size: 0.82rem;
-}
-.topbar .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.topbar a { opacity: 0.9; }
-.topbar-contact { display: flex; gap: 18px; flex-wrap: wrap; }
-.topbar-contact span { display: inline-flex; align-items: center; gap: 6px; }
-
 /* ---------- Header ---------- */
 .site-header {
   background: var(--color-surface);
@@ -938,7 +919,6 @@ p { margin: 0 0 1em; }
     box-shadow: var(--shadow-lg);
     align-items: flex-start;
   }
-  .topbar-contact span:nth-child(2) { display: none; }
   .product-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .product-card-body { padding: 12px; }
   .steps-grid { grid-template-columns: 1fr; }

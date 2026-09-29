@@ -14,15 +14,6 @@ function renderHeader(active) {
   const el = document.getElementById("site-header");
   if (!el) return;
   el.innerHTML = `
-    <div class="topbar">
-      <div class="container">
-        <div class="topbar-contact">
-          <span>${ICONS.phone} 11 6107-1330</span>
-          <span>${ICONS.mail} bernarditabarresishoes@gmail.com</span>
-        </div>
-        <span>${ICONS.truck} Envíos a todo el país con Correo Argentino</span>
-      </div>
-    </div>
     <header class="site-header">
       <div class="container">
         <a class="brand" href="index.html">
