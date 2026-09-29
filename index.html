@@ -121,26 +121,9 @@
       <span class="eyebrow" style="display:block;text-align:center;">Lo que dicen nuestras clientas</span>
       <h2 class="section-title" style="text-align:center;">Confianza que se nota</h2>
       <p class="section-subtitle"><!-- TODO: reemplazar por reseñas reales de clientas --></p>
-      <div class="testimonial-grid">
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p>"Compré unas sandalias y me quedaron perfectas. El cuero es hermoso y se nota el trabajo artesanal."</p>
-          <div class="testimonial-name">María C.</div>
-          <div class="testimonial-role">Cliente — Buenos Aires</div>
-        </div>
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p>"Me equivoqué de talle y me lo cambiaron sin problema. Excelente atención por WhatsApp."</p>
-          <div class="testimonial-name">Silvina R.</div>
-          <div class="testimonial-role">Cliente — Monte Grande</div>
-        </div>
-        <div class="testimonial-card">
-          <div class="stars">★★★★★</div>
-          <p>"Llegó rápido con Correo Argentino y el calzado es más lindo en persona. Ya voy por el segundo par."</p>
-          <div class="testimonial-name">Gabriela T.</div>
-          <div class="testimonial-role">Cliente — Córdoba</div>
-        </div>
-      </div>
+    </div>
+    <div class="testimonial-marquee" aria-label="Reseñas de clientas">
+      <div class="testimonial-track" id="testimonial-track"></div>
     </div>
   </section>
 
@@ -174,6 +157,27 @@
     el.innerHTML = ICONS[el.dataset.icon] || "";
   });
   document.querySelector(".social-ig").innerHTML = ICONS.instagram;
+
+  /* Reseñas: para sumar una, agregá un objeto a esta lista (rating de 1 a 5).
+     TODO: reemplazar por reseñas reales de clientas. */
+  const TESTIMONIALS = [
+    { rating: 5, text: "Compré unas sandalias y me quedaron perfectas. El cuero es hermoso y se nota el trabajo artesanal.", name: "María C.", place: "Buenos Aires" },
+    { rating: 5, text: "Me equivoqué de talle y me lo cambiaron sin problema. Excelente atención por WhatsApp.", name: "Silvina R.", place: "Monte Grande" },
+    { rating: 5, text: "Llegó rápido con Correo Argentino y el calzado es más lindo en persona. Ya voy por el segundo par.", name: "Gabriela T.", place: "Córdoba" },
+  ];
+  const track = document.getElementById("testimonial-track");
+  const cards = TESTIMONIALS.map((t) => `
+    <div class="testimonial-card">
+      <div class="stars" aria-label="${t.rating} de 5 estrellas">${"★".repeat(t.rating)}<span class="stars-off">${"★".repeat(5 - t.rating)}</span></div>
+      <p>"${t.text}"</p>
+      <div class="testimonial-name">${t.name}</div>
+      <div class="testimonial-role">Cliente — ${t.place}</div>
+    </div>`).join("");
+  // La tira se repite hasta cubrir pantallas anchas y después se duplica,
+  // así el movimiento es un loop continuo sin huecos.
+  const set = cards.repeat(Math.max(1, Math.ceil(6 / TESTIMONIALS.length)));
+  track.innerHTML = cards + set.slice(cards.length).replace(/class="testimonial-card"/g, 'class="testimonial-card" aria-hidden="true"')
+    + set.replace(/class="testimonial-card"/g, 'class="testimonial-card" aria-hidden="true"');
 
   const homeGrid = document.getElementById("home-products");
   homeGrid.innerHTML = PRODUCTS.slice(0, 8)

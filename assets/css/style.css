@@ -493,6 +493,33 @@ p { margin: 0 0 1em; }
   border-radius: var(--radius-md);
   padding: 24px;
 }
+/* Reseñas en movimiento (home) */
+.testimonial-marquee {
+  overflow: hidden;
+  padding: 4px 0 8px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.testimonial-track {
+  display: flex;
+  gap: 22px;
+  width: max-content;
+  animation: testimonial-scroll 60s linear infinite;
+}
+.testimonial-marquee:hover .testimonial-track { animation-play-state: paused; }
+.testimonial-track .testimonial-card { width: 340px; flex-shrink: 0; }
+.stars-off { color: var(--color-border); }
+@keyframes testimonial-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 11px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-marquee { overflow-x: auto; }
+  .testimonial-track { animation: none; }
+}
+@media (max-width: 720px) {
+  .testimonial-track .testimonial-card { width: 280px; }
+}
 .stars { color: var(--color-accent); letter-spacing: 2px; margin-bottom: 10px; font-size: 0.95rem; }
 .testimonial-name { font-weight: 700; margin-top: 12px; font-size: 0.88rem; }
 .testimonial-role { color: var(--color-text-muted); font-size: 0.78rem; }
