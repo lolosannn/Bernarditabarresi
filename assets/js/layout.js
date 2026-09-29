@@ -59,7 +59,7 @@ function renderFooter() {
             <span class="brand-name" style="color:#fff;font-family:var(--font-heading);font-size:1.3rem;">Bernardita Barresi</span>
             <p>Calzado de cuero hecho a mano en nuestro taller de Monte Grande, Buenos Aires. Diseño, oficio y calidad en cada par.</p>
             <div class="footer-social">
-              <a href="#" aria-label="Instagram" target="_blank" rel="noopener">${ICONS.instagram}</a>
+              <a href="https://www.instagram.com/bernarditabarresi/" aria-label="Instagram" target="_blank" rel="noopener">${ICONS.instagram}</a>
               <a href="#" aria-label="Facebook" target="_blank" rel="noopener">${ICONS.facebook}</a>
             </div>
           </div>
