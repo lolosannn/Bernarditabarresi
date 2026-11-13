@@ -52,6 +52,8 @@ const PRODUCTS = [
       },
     ],
     sizes: [35, 36, 37, 38, 39, 40],
+    // Largo máximo del pie (cm) para cada talle EN ESTA HORMA. TODO: cargar las medidas reales de este modelo.
+    sizeChart: { 35: 22.5, 36: 23.2, 37: 23.9, 38: 24.6, 39: 25.3, 40: 26.0 },
     stock: { 35: true, 36: true, 37: true, 38: true, 39: true, 40: true },
     description: "Sandalia chata de tiras cruzadas con hebilla al tobillo. Hecha a mano en cuero, en nuestro taller.",
   },
@@ -112,6 +114,8 @@ const PRODUCTS = [
       },
     ],
     sizes: [35, 36, 37, 38, 39, 40],
+    // Largo máximo del pie (cm) para cada talle EN ESTA HORMA. TODO: cargar las medidas reales de este modelo.
+    sizeChart: { 35: 22.5, 36: 23.2, 37: 23.9, 38: 24.6, 39: 25.3, 40: 26.0 },
     stock: { 35: true, 36: true, 37: true, 38: true, 39: true, 40: true },
     description: "Sandalia chata con pulsera al tobillo y frente con volado. Hecha a mano en cuero, en nuestro taller.",
   },
@@ -155,6 +159,8 @@ const PRODUCTS = [
       },
     ],
     sizes: [35, 36, 37, 38, 39, 40],
+    // Largo máximo del pie (cm) para cada talle EN ESTA HORMA. TODO: cargar las medidas reales de este modelo.
+    sizeChart: { 35: 22.5, 36: 23.2, 37: 23.9, 38: 24.6, 39: 25.3, 40: 26.0 },
     stock: { 35: true, 36: true, 37: true, 38: true, 39: true, 40: true },
     description: "Sandalia de taco chino bajo, con talón abierto y flores aplicadas. Hecha a mano en cuero, en nuestro taller.",
   },
@@ -201,6 +207,8 @@ const PRODUCTS = [
       },
     ],
     sizes: [35, 36, 37, 38, 39, 40],
+    // Largo máximo del pie (cm) para cada talle EN ESTA HORMA. TODO: cargar las medidas reales de este modelo.
+    sizeChart: { 35: 22.5, 36: 23.2, 37: 23.9, 38: 24.6, 39: 25.3, 40: 26.0 },
     stock: { 35: true, 36: true, 37: true, 38: true, 39: true, 40: true },
     description: "Chata de punta fina con borde ondulado. Hecha a mano en cuero, en nuestro taller.",
   },
@@ -245,6 +253,8 @@ const PRODUCTS = [
       },
     ],
     sizes: [35, 36, 37, 38, 39, 40],
+    // Largo máximo del pie (cm) para cada talle EN ESTA HORMA. TODO: cargar las medidas reales de este modelo.
+    sizeChart: { 35: 22.5, 36: 23.2, 37: 23.9, 38: 24.6, 39: 25.3, 40: 26.0 },
     stock: { 35: true, 36: true, 37: true, 38: true, 39: true, 40: true },
     description: "Guillermina de punta con capellada tejida y pulsera al tobillo. Hecha a mano en cuero, en nuestro taller.",
   },
@@ -299,6 +309,8 @@ const PRODUCTS = [
       },
     ],
     sizes: [35, 36, 37, 38, 39, 40],
+    // Largo máximo del pie (cm) para cada talle EN ESTA HORMA. TODO: cargar las medidas reales de este modelo.
+    sizeChart: { 35: 22.5, 36: 23.2, 37: 23.9, 38: 24.6, 39: 25.3, 40: 26.0 },
     stock: { 35: true, 36: true, 37: true, 38: true, 39: true, 40: true },
     description: "Sandalia chata de tiras curvas con pulsera al tobillo. Hecha a mano en cuero, en nuestro taller.",
   },
@@ -340,6 +352,8 @@ const PRODUCTS = [
       },
     ],
     sizes: [35, 36, 37, 38, 39, 40],
+    // Largo máximo del pie (cm) para cada talle EN ESTA HORMA. TODO: cargar las medidas reales de este modelo.
+    sizeChart: { 35: 22.5, 36: 23.2, 37: 23.9, 38: 24.6, 39: 25.3, 40: 26.0 },
     stock: { 35: true, 36: true, 37: true, 38: true, 39: true, 40: true },
     description: "Guillermina peep-toe con pulsera al tobillo y capellada calada. Hecha a mano en cuero, en nuestro taller.",
   },
@@ -365,6 +379,8 @@ const PRODUCTS = [
       },
     ],
     sizes: [35, 36, 37, 38, 39, 40],
+    // Largo máximo del pie (cm) para cada talle EN ESTA HORMA. TODO: cargar las medidas reales de este modelo.
+    sizeChart: { 35: 22.5, 36: 23.2, 37: 23.9, 38: 24.6, 39: 25.3, 40: 26.0 },
     stock: { 35: true, 36: true, 37: true, 38: true, 39: true, 40: true },
     description: "Chata peep-toe con pulsera, banda plateada y moño negro. Hecha a mano en cuero, en nuestro taller.",
   },
@@ -406,6 +422,8 @@ const PRODUCTS = [
       },
     ],
     sizes: [35, 36, 37, 38, 39, 40],
+    // Largo máximo del pie (cm) para cada talle EN ESTA HORMA. TODO: cargar las medidas reales de este modelo.
+    sizeChart: { 35: 22.5, 36: 23.2, 37: 23.9, 38: 24.6, 39: 25.3, 40: 26.0 },
     stock: { 35: true, 36: true, 37: true, 38: true, 39: true, 40: true },
     description: "Sandalia metalizada de taco bajo con tiras cruzadas. Hecha a mano en cuero, en nuestro taller.",
   },
@@ -427,6 +445,33 @@ function categoriesWithProducts() {
 function categoryLabel(key) {
   const c = CATEGORIES.find((c) => c.key === key);
   return c ? c.label : key;
+}
+
+/* Guía de talles por modelo: cada horma calza distinto, así que cada producto
+   tiene su propia tabla (talle -> largo máximo del pie en cm). */
+const DEFAULT_SIZE_CHART = { 35: 22.5, 36: 23.2, 37: 23.9, 38: 24.6, 39: 25.3, 40: 26.0 };
+
+function getSizeChart(p) {
+  return p.sizeChart || DEFAULT_SIZE_CHART;
+}
+
+/* Devuelve el talle más chico cuyo largo cubre el pie, o null si el pie queda
+   fuera de la tabla (más chico que el primer talle por más de 1 cm o más
+   grande que el último). */
+function recommendSize(p, footCm) {
+  const chart = getSizeChart(p);
+  const sizes = Object.keys(chart).map(Number).sort((a, b) => a - b);
+  if (!(footCm > 0)) return null;
+  if (footCm < chart[sizes[0]] - 1) return { size: null, reason: "small" };
+  const size = sizes.find((s) => footCm <= chart[s]);
+  if (size === undefined) return { size: null, reason: "big" };
+  // Si el pie queda a menos de 2 mm del límite, avisamos que puede ir justo.
+  const tight = chart[size] - footCm < 0.2;
+  return { size, tight };
+}
+
+function formatCm(n) {
+  return n.toLocaleString("es-AR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 }
 
 function formatPrice(value) {

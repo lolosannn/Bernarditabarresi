@@ -90,10 +90,39 @@
           <div class="color-options" id="color-options"></div>
         </div>
 
+        <section class="size-finder" id="size-finder" aria-labelledby="size-finder-title">
+          <div class="size-finder-head">
+            <span class="size-finder-icon">${ICONS.ruler}</span>
+            <div>
+              <h2 id="size-finder-title">¿Qué talle elijo en este modelo?</h2>
+              <p>Cada horma calza distinto. Medí tu pie y te marcamos el talle justo para el modelo ${product.name}.</p>
+            </div>
+          </div>
+          <label class="size-finder-label" for="foot-cm">¿Cuánto mide tu pie?</label>
+          <div class="size-finder-input">
+            <input id="foot-cm" type="text" inputmode="decimal" autocomplete="off" placeholder="Ej: 23,5">
+            <span>cm</span>
+          </div>
+          <div class="size-finder-result" id="size-result" aria-live="polite">Escribí el largo de tu pie y te mostramos tu talle.</div>
+          <table class="size-finder-table">
+            <thead><tr><th>Talle</th><th>Largo de tu pie</th></tr></thead>
+            <tbody id="size-finder-rows"></tbody>
+          </table>
+          <details class="size-finder-how">
+            <summary>¿Cómo me mido el pie?</summary>
+            <ol>
+              <li>Apoyá el pie descalzo sobre una hoja, con el talón contra la pared.</li>
+              <li>Marcá con un lápiz la punta del dedo más largo.</li>
+              <li>Medí con una regla desde la pared hasta la marca, en centímetros.</li>
+            </ol>
+            <p>Medite a la tarde, que el pie está un poco más hinchado. Si un pie es más largo que el otro, usá esa medida.</p>
+          </details>
+        </section>
+
         <div class="option-group">
           <div class="option-label">
             <span>Talle</span>
-            <button data-open-modal="modal-size-guide">${ICONS.ruler} ¿Qué talle uso?</button>
+            <button type="button" id="size-finder-link">${ICONS.ruler} ¿Qué talle uso?</button>
           </div>
           <div class="size-options" id="size-options"></div>
           <div class="notify-link" id="notify-link" style="display:none;">
@@ -205,6 +234,61 @@
         document.getElementById("notify-link").style.display = "none";
         updateAskLink();
       });
+    });
+
+    // Calculadora de talle de este modelo
+    const chart = getSizeChart(product);
+    const chartSizes = Object.keys(chart).map(Number).sort((a, b) => a - b);
+    document.getElementById("size-finder-rows").innerHTML = chartSizes
+      .map((sz, i) => {
+        const from = i === 0 ? null : chart[chartSizes[i - 1]] + 0.1;
+        const range = from === null ? `hasta ${formatCm(chart[sz])} cm` : `${formatCm(from)} a ${formatCm(chart[sz])} cm`;
+        return `<tr data-size="${sz}"><td>${sz}</td><td>${range}</td></tr>`;
+      })
+      .join("");
+
+    function selectSize(sz) {
+      const btn = document.querySelector(`.size-option[data-size="${sz}"]`);
+      if (btn && !btn.disabled) btn.click();
+      return btn && !btn.disabled;
+    }
+
+    const footInput = document.getElementById("foot-cm");
+    const resultEl = document.getElementById("size-result");
+    footInput.addEventListener("input", () => {
+      let cm = parseFloat(footInput.value.replace(",", "."));
+      if (cm > 100) cm = cm / 10; // escribieron milímetros (ej. 235)
+      document.querySelectorAll("#size-finder-rows tr").forEach((tr) => tr.classList.remove("is-match"));
+      resultEl.classList.remove("is-ok", "is-warn");
+      if (!footInput.value.trim()) {
+        resultEl.textContent = "Escribí el largo de tu pie y te mostramos tu talle.";
+        return;
+      }
+      const rec = recommendSize(product, cm);
+      if (!rec) {
+        resultEl.textContent = "Escribí la medida en centímetros, por ejemplo 23,5.";
+        return;
+      }
+      if (rec.size === null) {
+        resultEl.classList.add("is-warn");
+        resultEl.innerHTML = `Para ${formatCm(cm)} cm no tenemos un talle de línea en este modelo, pero lo podemos hacer a medida. <a class="link-underline" target="_blank" rel="noopener" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hola! Mi pie mide ${formatCm(cm)} cm y me interesa el modelo ${product.name}. ¿Lo pueden hacer a medida?`)}">Consultanos</a>.`;
+        return;
+      }
+      document.querySelector(`#size-finder-rows tr[data-size="${rec.size}"]`).classList.add("is-match");
+      const marked = selectSize(rec.size);
+      resultEl.classList.add("is-ok");
+      resultEl.innerHTML = `Tu talle es <strong class="size-finder-big">${rec.size}</strong> <span>· pie de hasta ${formatCm(chart[rec.size])} cm</span>`
+        + (rec.tight
+          ? (chart[rec.size + 1]
+            ? `<small>Estás justo en el límite: si tenés el pie ancho o usás medias gruesas, elegí el ${rec.size + 1}.</small>`
+            : `<small>Estás justo en el límite: si tenés el pie ancho, consultanos y te lo hacemos a medida.</small>`)
+          : "")
+        + (marked ? `<small>Ya lo marcamos en los talles de abajo.</small>` : `<small>Ese talle no está disponible ahora. Consultanos por WhatsApp.</small>`);
+    });
+
+    document.getElementById("size-finder-link").addEventListener("click", () => {
+      document.getElementById("size-finder").scrollIntoView({ behavior: "smooth", block: "center" });
+      footInput.focus({ preventScroll: true });
     });
 
     function updateAskLink() {
