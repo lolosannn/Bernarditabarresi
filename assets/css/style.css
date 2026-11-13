@@ -454,7 +454,7 @@ p { margin: 0 0 1em; }
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 26px 24px;
-  margin: 6px 0 26px;
+  margin: 0 0 26px;
 }
 .size-finder-head { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 18px; }
 .size-finder-icon {

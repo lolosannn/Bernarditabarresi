@@ -90,6 +90,29 @@
           <div class="color-options" id="color-options"></div>
         </div>
 
+        <div class="option-group">
+          <div class="option-label">
+            <span>Talle</span>
+            <button type="button" id="size-finder-link">${ICONS.ruler} ¿Qué talle uso?</button>
+          </div>
+          <div class="size-options" id="size-options"></div>
+          <div class="notify-link" id="notify-link" style="display:none;">
+            <a href="#" id="notify-cta" class="link-underline">Avisame cuando esté disponible este talle</a>
+          </div>
+        </div>
+
+        <div class="product-cta">
+          ${hasPrice(product)
+            ? `<button class="btn btn-primary btn-lg btn-block" id="add-to-cart-btn">${ICONS.bag} Agregar al carrito</button>`
+            : `<a class="btn btn-whatsapp btn-lg btn-block" id="ask-btn" target="_blank" rel="noopener">${ICONS.whatsapp} Consultar precio por WhatsApp</a>`}
+        </div>
+
+        <ul class="product-trust">
+          <li>${ICONS.truck}<span>Envío a todo el país</span></li>
+          <li>${ICONS.refresh}<span>Primer cambio gratis</span></li>
+          <li>${ICONS.shield}<span>Pago seguro</span></li>
+        </ul>
+
         <section class="size-finder" id="size-finder" aria-labelledby="size-finder-title">
           <div class="size-finder-head">
             <span class="size-finder-icon">${ICONS.ruler}</span>
@@ -118,29 +141,6 @@
             <p>Medite a la tarde, que el pie está un poco más hinchado. Si un pie es más largo que el otro, usá esa medida.</p>
           </details>
         </section>
-
-        <div class="option-group">
-          <div class="option-label">
-            <span>Talle</span>
-            <button type="button" id="size-finder-link">${ICONS.ruler} ¿Qué talle uso?</button>
-          </div>
-          <div class="size-options" id="size-options"></div>
-          <div class="notify-link" id="notify-link" style="display:none;">
-            <a href="#" id="notify-cta" class="link-underline">Avisame cuando esté disponible este talle</a>
-          </div>
-        </div>
-
-        <div class="product-cta">
-          ${hasPrice(product)
-            ? `<button class="btn btn-primary btn-lg btn-block" id="add-to-cart-btn">${ICONS.bag} Agregar al carrito</button>`
-            : `<a class="btn btn-whatsapp btn-lg btn-block" id="ask-btn" target="_blank" rel="noopener">${ICONS.whatsapp} Consultar precio por WhatsApp</a>`}
-        </div>
-
-        <ul class="product-trust">
-          <li>${ICONS.truck}<span>Envío a todo el país</span></li>
-          <li>${ICONS.refresh}<span>Primer cambio gratis</span></li>
-          <li>${ICONS.shield}<span>Pago seguro</span></li>
-        </ul>
 
         <div class="accordion" id="product-accordion">
           <div class="accordion-item" data-open="true">
@@ -283,7 +283,7 @@
             ? `<small>Estás justo en el límite: si tenés el pie ancho o usás medias gruesas, elegí el ${rec.size + 1}.</small>`
             : `<small>Estás justo en el límite: si tenés el pie ancho, consultanos y te lo hacemos a medida.</small>`)
           : "")
-        + (marked ? `<small>Ya lo marcamos en los talles de abajo.</small>` : `<small>Ese talle no está disponible ahora. Consultanos por WhatsApp.</small>`);
+        + (marked ? `<small>Ya lo marcamos en los talles de arriba.</small>` : `<small>Ese talle no está disponible ahora. Consultanos por WhatsApp.</small>`);
     });
 
     document.getElementById("size-finder-link").addEventListener("click", () => {
