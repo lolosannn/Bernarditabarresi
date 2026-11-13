@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bernardita Barresi — Calzado artesanal de cuero hecho a mano</title>
-<meta name="description" content="Sandalias, chatas y botas de cuero genuino, hechas a mano en nuestro taller de Monte Grande. Envíos a todo el país y primer cambio gratis.">
+<meta name="description" content="Sandalias, chatas y guillerminas de cuero genuino, hechas a mano en nuestro taller de Monte Grande. Envíos a todo el país y primer cambio gratis.">
 <meta property="og:title" content="Bernardita Barresi — Calzado artesanal">
 <meta property="og:description" content="Calzado de cuero hecho a mano en Monte Grande, Buenos Aires. Envíos a todo el país.">
 <meta property="og:type" content="website">
@@ -21,7 +21,7 @@
     <div class="container">
       <span class="eyebrow eyebrow-light">Hecho a mano en Monte Grande</span>
       <h1>Calzado de cuero, pensado para acompañarte todos los días</h1>
-      <p>Sandalias, chatas y botas artesanales, elaboradas con cuero vacuno genuino. Diseño y oficio en cada par, con el respaldo de un taller familiar.</p>
+      <p>Sandalias, chatas y guillerminas artesanales, elaboradas con cuero vacuno genuino. Diseño y oficio en cada par, con el respaldo de un taller familiar.</p>
       <div class="hero-cta">
         <a href="mujer.html" class="btn btn-primary btn-lg">Ver colección</a>
         <a href="sobre-nosotros.html" class="btn btn-outline-light btn-lg">Conocé nuestra historia</a>
@@ -180,30 +180,7 @@
     + set.replace(/class="testimonial-card"/g, 'class="testimonial-card" aria-hidden="true"');
 
   const homeGrid = document.getElementById("home-products");
-  homeGrid.innerHTML = PRODUCTS.slice(0, 8)
-    .map(
-      (p) => `
-    <div class="product-card">
-      <a class="product-card-media" href="producto.html?slug=${p.slug}">
-        ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ""}
-        ${phMedia({ hue: p.hue, ar: "4/5", tag: "Foto producto" })}
-      </a>
-      <div class="product-card-body">
-        <span class="product-colors">${p.colors.length} colores</span>
-        <a href="producto.html?slug=${p.slug}"><h3 class="product-name">${p.name}</h3></a>
-        <span class="product-price">${formatPrice(p.price)}</span>
-        <span class="product-price-transfer">${formatPrice(Math.round(p.price * 0.9))} por transferencia</span>
-        <button class="btn btn-primary btn-block" onclick="quickAdd('${p.slug}')">Agregar al carrito</button>
-      </div>
-    </div>`
-    )
-    .join("");
-
-  function quickAdd(slug) {
-    const p = getProduct(slug);
-    const defaultSize = p.sizes.find((s) => p.stock[s]);
-    addToCart(p, p.colors[0].name, defaultSize, 1);
-  }
+  homeGrid.innerHTML = PRODUCTS.slice(0, 8).map(productCardHTML).join("");
 </script>
 </body>
 </html>

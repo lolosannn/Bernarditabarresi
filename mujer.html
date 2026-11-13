@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Promociones — Bernardita Barresi</title>
-<meta name="description" content="Sandalias, chatas y botas de cuero genuino hechas a mano. Envíos a todo el país.">
+<meta name="description" content="Sandalias, chatas y guillerminas de cuero hechas a mano. Envíos a todo el país.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -27,7 +27,7 @@
         <button class="chip" data-filter="todos" aria-pressed="true">Todos</button>
         <button class="chip" data-filter="sandalias" aria-pressed="false">Sandalias</button>
         <button class="chip" data-filter="chatas" aria-pressed="false">Chatas</button>
-        <button class="chip" data-filter="botas" aria-pressed="false">Botas</button>
+        <button class="chip" data-filter="guillerminas" aria-pressed="false">Guillerminas</button>
       </div>
 
       <div class="product-grid" id="catalog-grid"></div>
@@ -55,26 +55,9 @@
   renderHeader("mujer");
   renderFooter();
 
-  function cardHTML(p) {
-    return `
-    <div class="product-card">
-      <a class="product-card-media" href="producto.html?slug=${p.slug}">
-        ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ""}
-        ${phMedia({ hue: p.hue, ar: "4/5", tag: "Foto producto" })}
-      </a>
-      <div class="product-card-body">
-        <span class="product-colors">${p.colors.length} colores</span>
-        <a href="producto.html?slug=${p.slug}"><h3 class="product-name">${p.name}</h3></a>
-        <span class="product-price">${formatPrice(p.price)}</span>
-        <span class="product-price-transfer">${formatPrice(Math.round(p.price * 0.9))} por transferencia</span>
-        <button class="btn btn-primary btn-block" onclick="quickAdd('${p.slug}')">Agregar al carrito</button>
-      </div>
-    </div>`;
-  }
-
   function renderCatalog(filter) {
     const list = filter === "todos" ? PRODUCTS : PRODUCTS.filter((p) => p.category === filter);
-    document.getElementById("catalog-grid").innerHTML = list.map(cardHTML).join("");
+    document.getElementById("catalog-grid").innerHTML = list.map(productCardHTML).join("");
   }
 
   document.querySelectorAll("#filter-bar .chip").forEach((btn) => {
@@ -87,11 +70,6 @@
 
   renderCatalog("todos");
 
-  function quickAdd(slug) {
-    const p = getProduct(slug);
-    const defaultSize = p.sizes.find((s) => p.stock[s]);
-    addToCart(p, p.colors[0].name, defaultSize, 1);
-  }
 </script>
 </body>
 </html>

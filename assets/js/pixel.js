@@ -42,7 +42,7 @@ function trackViewContent(product) {
     content_name: product.name,
     content_category: product.category,
     content_ids: [product.slug],
-    value: product.price,
+    value: product.price || 0,
     currency: "ARS",
   });
 }
@@ -51,7 +51,7 @@ function trackAddToCart(product, size, qty) {
   trackEvent("AddToCart", {
     content_name: product.name,
     content_ids: [product.slug],
-    value: product.price * qty,
+    value: (product.price || 0) * qty,
     currency: "ARS",
     contents: [{ id: product.slug, quantity: qty, size: size }],
   });

@@ -40,7 +40,7 @@ function addToCart(product, color, size, qty = 1) {
       color: color,
       size: size,
       qty: qty,
-      hue: product.hue,
+      image: productCover(product, color),
     });
   }
   saveCart(items);
@@ -117,7 +117,7 @@ function renderCartDrawer() {
     .map(
       (item, idx) => `
     <div class="cart-item">
-      ${phMedia({ hue: item.hue, ar: "1/1", tag: "" })}
+      ${item.image ? `<img class="cart-item-img" src="${item.image}" alt="" width="72" height="72">` : phMedia({ hue: item.hue, ar: "1/1", tag: "" })}
       <div class="cart-item-info">
         <div class="name">${item.name}</div>
         <div class="meta">Color: ${item.color} · Talle: ${item.size}</div>

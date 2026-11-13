@@ -70,13 +70,18 @@
           <span class="eyebrow">${product.category}</span>
           <h1>${product.name}</h1>
         </div>
+        ${hasPrice(product) ? `
         <div class="price-row">
           <span class="price">${formatPrice(product.price)}</span>
         </div>
         <div class="product-price-transfer" style="font-size:0.9rem;margin-bottom:14px;">
           ${formatPrice(Math.round(product.price * 0.9))} pagando por transferencia (10% OFF)
         </div>
-        <div class="stock-status">${ICONS.check} ${availableSizes > 0 ? "En stock — listo para enviar" : "Sin stock temporalmente"}</div>
+        <div class="stock-status">${ICONS.check} ${availableSizes > 0 ? "En stock — listo para enviar" : "Sin stock temporalmente"}</div>` : `
+        <div class="price-row">
+          <span class="price-ask">Consultá el precio por WhatsApp</span>
+        </div>
+        <div class="stock-status">${ICONS.check} Hecho a mano — te confirmamos stock y precio al instante</div>`}
 
         <p style="color:var(--color-text-muted);">${product.description}</p>
 
@@ -97,7 +102,9 @@
         </div>
 
         <div class="product-cta">
-          <button class="btn btn-primary btn-lg btn-block" id="add-to-cart-btn">${ICONS.bag} Agregar al carrito</button>
+          ${hasPrice(product)
+            ? `<button class="btn btn-primary btn-lg btn-block" id="add-to-cart-btn">${ICONS.bag} Agregar al carrito</button>`
+            : `<a class="btn btn-whatsapp btn-lg btn-block" id="ask-btn" target="_blank" rel="noopener">${ICONS.whatsapp} Consultar precio por WhatsApp</a>`}
         </div>
 
         <ul class="product-trust">
@@ -111,10 +118,11 @@
             <button class="accordion-trigger">Detalles y materiales <span class="chevron">${chevron()}</span></button>
             <div class="accordion-panel" style="max-height:400px;">
               <div class="accordion-panel-inner">
-                <p><strong>Material:</strong> ${product.material}</p>
-                <p><strong>Forrería:</strong> ${product.forrado}</p>
-                <p><strong>Suela:</strong> ${product.suela}</p>
-                <p><strong>Altura del taco:</strong> ${product.taco}</p>
+                ${product.material ? `<p><strong>Material:</strong> ${product.material}</p>` : ""}
+                ${product.forrado ? `<p><strong>Forrería:</strong> ${product.forrado}</p>` : ""}
+                ${product.suela ? `<p><strong>Suela:</strong> ${product.suela}</p>` : ""}
+                ${product.taco ? `<p><strong>Altura del taco:</strong> ${product.taco}</p>` : ""}
+                <p>Hecho íntegramente a mano en nuestro taller, con materias primas naturales. ¿Lo querés a medida o en otro color? Consultanos.</p>
               </div>
             </div>
           </div>
@@ -145,24 +153,23 @@
       </div>
     `;
 
-    // Gallery
-    const images = [
-      { tag: "Foto producto", ar: "4/5" },
-      { tag: "Foto detalle", ar: "4/5" },
-      { tag: "Foto lifestyle", ar: "4/5" },
-    ];
-    document.getElementById("gallery-main").innerHTML = phMedia({ hue: product.hue, ar: "4/5", tag: images[0].tag });
-    document.getElementById("gallery-thumbs").innerHTML = images
-      .map((img, i) => `<div class="ph-media-wrap" data-idx="${i}">${phMedia({ hue: product.hue, ar: "1/1", tag: "" })}</div>`)
-      .join("");
-    document.querySelectorAll("#gallery-thumbs > div").forEach((el, i) => {
-      el.querySelector(".ph-media").classList.toggle("active", i === 0);
-      el.addEventListener("click", () => {
-        document.getElementById("gallery-main").innerHTML = phMedia({ hue: product.hue, ar: "4/5", tag: images[i].tag });
-        document.querySelectorAll("#gallery-thumbs .ph-media").forEach((t) => t.classList.remove("active"));
-        el.querySelector(".ph-media").classList.add("active");
+    // Gallery: muestra las fotos del color elegido
+    function renderGallery() {
+      const imgs = getColor(product, selectedColor).images;
+      const main = document.getElementById("gallery-main");
+      main.innerHTML = `<img class="product-img" src="${imgs[0]}" alt="${product.name} ${selectedColor}" width="800" height="1000">`;
+      document.getElementById("gallery-thumbs").innerHTML = imgs
+        .map((src, i) => `<button class="gallery-thumb${i === 0 ? " active" : ""}" data-idx="${i}" aria-label="Foto ${i + 1}"><img src="${src}" alt="" loading="lazy" width="160" height="160"></button>`)
+        .join("");
+      document.querySelectorAll("#gallery-thumbs .gallery-thumb").forEach((el) => {
+        el.addEventListener("click", () => {
+          main.querySelector("img").src = imgs[Number(el.dataset.idx)];
+          document.querySelectorAll("#gallery-thumbs .gallery-thumb").forEach((t) => t.classList.remove("active"));
+          el.classList.add("active");
+        });
       });
-    });
+    }
+    renderGallery();
 
     // Colors
     document.getElementById("color-options").innerHTML = product.colors
@@ -177,6 +184,8 @@
         document.getElementById("color-label").textContent = selectedColor;
         document.querySelectorAll(".color-swatch").forEach((b) => b.setAttribute("aria-pressed", "false"));
         btn.setAttribute("aria-pressed", "true");
+        renderGallery();
+        updateAskLink();
       });
     });
 
@@ -194,13 +203,22 @@
         document.querySelectorAll(".size-option").forEach((b) => b.setAttribute("aria-pressed", "false"));
         btn.setAttribute("aria-pressed", "true");
         document.getElementById("notify-link").style.display = "none";
+        updateAskLink();
       });
     });
+
+    function updateAskLink() {
+      const ask = document.getElementById("ask-btn");
+      if (!ask) return;
+      const msg = `Hola! Me interesa el modelo ${product.name} en color ${selectedColor}${selectedSize ? `, talle ${selectedSize}` : ""}. ¿Me pasan precio y disponibilidad? 😊`;
+      ask.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    }
+    updateAskLink();
 
     const waMsg = encodeURIComponent(`Hola! Tengo una consulta sobre el ${product.name} 😊`);
     document.getElementById("wa-inline-link").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
 
-    document.getElementById("add-to-cart-btn").addEventListener("click", () => {
+    document.getElementById("add-to-cart-btn")?.addEventListener("click", () => {
       if (!selectedSize) {
         showToast("Elegí un talle antes de continuar");
         document.getElementById("notify-link").style.display = "block";
@@ -236,6 +254,12 @@
       sticky.className = "sticky-add";
       document.body.appendChild(sticky);
     }
+    if (!hasPrice(product)) {
+      sticky.innerHTML = `<span class="price-ask">${product.name}</span>
+      <button class="btn btn-whatsapp" id="sticky-add-btn">Consultar</button>`;
+      document.getElementById("sticky-add-btn").addEventListener("click", () => document.getElementById("ask-btn").click());
+      return;
+    }
     sticky.innerHTML = `
       <span class="price">${formatPrice(product.price)}</span>
       <button class="btn btn-primary" id="sticky-add-btn">Agregar</button>
@@ -245,25 +269,11 @@
     });
   }
 
-  function relatedHTML(p) {
-    return `
-    <div class="product-card">
-      <a class="product-card-media" href="producto.html?slug=${p.slug}">
-        ${phMedia({ hue: p.hue, ar: "4/5", tag: "Foto producto" })}
-      </a>
-      <div class="product-card-body">
-        <a href="producto.html?slug=${p.slug}"><h3 class="product-name">${p.name}</h3></a>
-        <span class="product-price">${formatPrice(p.price)}</span>
-        <button class="btn btn-secondary btn-block" onclick="window.location.href='producto.html?slug=${p.slug}'">Ver producto</button>
-      </div>
-    </div>`;
-  }
-
   renderProduct();
   trackViewContent(product);
   document.getElementById("related-grid").innerHTML = PRODUCTS.filter((p) => p.slug !== product.slug)
     .slice(0, 4)
-    .map(relatedHTML)
+    .map(productCardHTML)
     .join("");
 </script>
 </body>
