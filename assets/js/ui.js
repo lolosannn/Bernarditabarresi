@@ -102,19 +102,70 @@ function sizeGuideMarkup() {
       <li>Repetí con el otro pie — usá siempre la medida del pie más grande.</li>
       <li>Buscá tu medida en la tabla y elegí ese talle. Ante una duda entre dos números, recomendamos el talle más grande.</li>
     </ol>
-    <table class="size-table">
-      <thead><tr><th>Talle AR</th>${SIZE_TABLE.map((s) => `<th>${s.ar}</th>`).join("")}</tr></thead>
-      <tbody><tr><th>Centímetros</th>${SIZE_TABLE.map((s) => `<td>${s.cm}</td>`).join("")}</tr></tbody>
+    <div class="size-finder">
+      <label for="size-finder-input">¿Cuánto te midió el pie?</label>
+      <div class="size-finder-row">
+        <input id="size-finder-input" type="text" inputmode="decimal" autocomplete="off" placeholder="Ej: 24,3">
+        <span>cm</span>
+      </div>
+      <div class="size-finder-result" id="size-finder-result" aria-live="polite"></div>
+    </div>
+    <table class="size-table" id="size-guide-table">
+      <thead><tr><th>Talle</th>${SIZE_TABLE.map((s) => `<th data-size="${s.ar}">${s.ar}</th>`).join("")}</tr></thead>
+      <tbody><tr><th>cm</th>${SIZE_TABLE.map((s) => `<td data-size="${s.ar}">${String(s.cm).replace(".", ",")}</td>`).join("")}</tr></tbody>
     </table>
     <p class="form-note">¿Seguís con dudas? Escribinos por WhatsApp y te ayudamos a elegir el talle ideal antes de comprar.</p>
     <a class="btn btn-whatsapp btn-block" target="_blank" rel="noopener" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola! Tengo una duda con mi talle 😊")}">${ICONS.whatsapp} Consultar por WhatsApp</a>
   `;
 }
 
+/* Talle recomendado para un largo de pie en cm: el primer talle cuya medida
+   cubre el pie (ante la duda, el más grande). null si queda fuera de la tabla. */
+function recommendSize(footCm) {
+  if (!(footCm > 0)) return null;
+  const last = SIZE_TABLE[SIZE_TABLE.length - 1];
+  if (footCm > last.cm || footCm < SIZE_TABLE[0].cm - 0.7) return null;
+  return SIZE_TABLE.find((s) => s.cm >= footCm).ar;
+}
+
+function initSizeFinder(root) {
+  const input = root.querySelector("#size-finder-input");
+  const result = root.querySelector("#size-finder-result");
+  if (!input) return;
+  input.addEventListener("input", () => {
+    const raw = input.value.replace(",", ".").replace(/[^0-9.]/g, "");
+    const cm = parseFloat(raw);
+    const size = recommendSize(cm);
+    root.querySelectorAll("#size-guide-table [data-size]").forEach((cell) => {
+      cell.classList.toggle("is-match", size !== null && Number(cell.dataset.size) === size);
+    });
+    if (!raw || !(cm > 0)) {
+      result.innerHTML = "";
+      return;
+    }
+    if (size === null) {
+      result.innerHTML = `Tu medida queda fuera de la tabla. <a class="link-underline" target="_blank" rel="noopener" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hola! Mi pie mide ${input.value} cm, ¿qué talle me conviene?`)}">Escribinos</a> y lo vemos juntas.`;
+      return;
+    }
+    const sizeBtn = document.querySelector(`.size-option[data-size="${size}"]:not([disabled])`);
+    result.innerHTML = `Tu talle es el <strong>${size}</strong>${sizeBtn ? ` <button type="button" class="btn btn-primary btn-sm" id="size-finder-pick">Elegir talle ${size}</button>` : ""}`;
+    result.querySelector("#size-finder-pick")?.addEventListener("click", () => {
+      sizeBtn.click();
+      closeModal("modal-size-guide");
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initMobileNav();
   initAccordion();
-  initModals();
+  // El contenedor del modal lo crea layout.js; lo armamos acá primero para
+  // poder llenarlo antes de enganchar los botones de abrir/cerrar.
+  if (typeof renderModalsShell === "function") renderModalsShell();
   const sizeGuideEl = document.getElementById("modal-size-guide");
-  if (sizeGuideEl) sizeGuideEl.querySelector(".modal-box").innerHTML = sizeGuideMarkup();
+  if (sizeGuideEl) {
+    sizeGuideEl.querySelector(".modal-box").innerHTML = sizeGuideMarkup();
+    initSizeFinder(sizeGuideEl);
+  }
+  initModals();
 });
