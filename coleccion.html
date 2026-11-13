@@ -18,15 +18,14 @@
     <nav class="breadcrumb"><a href="index.html">Inicio</a> &gt; Colección</nav>
   </div>
 
-  <section class="section-tight" style="padding-bottom:0;">
+  <section class="section-tight">
     <div class="container">
       <h1 style="text-align:center;">Colección</h1>
       <p class="section-subtitle">Todos nuestros modelos, hechos a mano en cuero en nuestro taller de Monte Grande.</p>
-      <nav class="filter-bar" id="category-nav" aria-label="Categorías" style="justify-content:center;"></nav>
+      <div class="filter-bar" id="category-nav" role="group" aria-label="Filtrar por categoría" style="justify-content:center;"></div>
+      <div class="product-grid" id="collection-grid"></div>
     </div>
   </section>
-
-  <div id="collection-sections"></div>
 
   <section class="section-tight">
     <div class="container">
@@ -49,26 +48,29 @@
   renderHeader("coleccion");
   renderFooter();
 
+  // Todos los modelos juntos; si se elige una categoría (o se entra con
+  // coleccion.html#sandalias, por ejemplo) se muestra solo esa.
   const cats = categoriesWithProducts();
-  document.getElementById("category-nav").innerHTML = cats
-    .map((cat) => `<a class="chip" href="#${cat.key}">${cat.label}</a>`)
+  const nav = document.getElementById("category-nav");
+  nav.innerHTML = [{ key: "", label: "Todos" }, ...cats]
+    .map((cat) => `<button class="chip" data-cat="${cat.key}" aria-pressed="false">${cat.label}</button>`)
     .join("");
-  document.getElementById("collection-sections").innerHTML = cats
-    .map((cat) => {
-      const items = PRODUCTS.filter((p) => p.category === cat.key);
-      return `
-    <section class="section collection-section" id="${cat.key}">
-      <div class="container">
-        <div class="collection-head">
-          <h2>${cat.label}</h2>
-          <span class="collection-count">${items.length} ${items.length === 1 ? "modelo" : "modelos"}</span>
-        </div>
-        <p class="collection-desc">${cat.description}</p>
-        <div class="product-grid">${items.map(productCardHTML).join("")}</div>
-      </div>
-    </section>`;
-    })
-    .join("");
+
+  function showCategory(key) {
+    if (!cats.some((c) => c.key === key)) key = "";
+    const list = key ? PRODUCTS.filter((p) => p.category === key) : PRODUCTS;
+    document.getElementById("collection-grid").innerHTML = list.map(productCardHTML).join("");
+    nav.querySelectorAll(".chip").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.cat === key)));
+  }
+
+  nav.addEventListener("click", (e) => {
+    const btn = e.target.closest(".chip");
+    if (!btn) return;
+    history.replaceState(null, "", btn.dataset.cat ? `#${btn.dataset.cat}` : location.pathname);
+    showCategory(btn.dataset.cat);
+  });
+  window.addEventListener("hashchange", () => showCategory(location.hash.slice(1)));
+  showCategory(location.hash.slice(1));
 </script>
 </body>
 </html>
