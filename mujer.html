@@ -25,9 +25,6 @@
 
       <div class="filter-bar" id="filter-bar" role="group" aria-label="Filtrar por categoría">
         <button class="chip" data-filter="todos" aria-pressed="true">Todos</button>
-        <button class="chip" data-filter="sandalias" aria-pressed="false">Sandalias</button>
-        <button class="chip" data-filter="chatas" aria-pressed="false">Chatas</button>
-        <button class="chip" data-filter="guillerminas" aria-pressed="false">Guillerminas</button>
       </div>
 
       <div class="product-grid" id="catalog-grid"></div>
@@ -59,6 +56,13 @@
     const list = filter === "todos" ? PRODUCTS : PRODUCTS.filter((p) => p.category === filter);
     document.getElementById("catalog-grid").innerHTML = list.map(productCardHTML).join("");
   }
+
+  document.getElementById("filter-bar").insertAdjacentHTML(
+    "beforeend",
+    categoriesWithProducts()
+      .map((cat) => `<button class="chip" data-filter="${cat.key}" aria-pressed="false">${cat.label}</button>`)
+      .join("")
+  );
 
   document.querySelectorAll("#filter-bar .chip").forEach((btn) => {
     btn.addEventListener("click", () => {

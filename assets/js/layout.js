@@ -4,6 +4,7 @@
 
 const NAV_ITEMS = [
   { key: "inicio", label: "Inicio", href: "index.html" },
+  { key: "coleccion", label: "Colección", href: "coleccion.html" },
   { key: "mujer", label: "Promociones", href: "mujer.html" },
   { key: "sobre-nosotros", label: "Sobre Nosotros", href: "sobre-nosotros.html" },
   { key: "medi-tu-numero", label: "Guía de Talles", href: "medi-tu-numero.html" },
@@ -30,7 +31,7 @@ function renderHeader(active) {
           ).join("")}
         </nav>
         <div class="header-actions">
-          <a class="icon-btn" href="mujer.html" aria-label="Buscar productos">${searchIcon()}</a>
+          <a class="icon-btn" href="coleccion.html" aria-label="Ver la colección">${searchIcon()}</a>
           <button class="icon-btn" id="cart-open-btn" aria-label="Ver carrito">
             ${ICONS.bag}<span class="cart-count" id="cart-count">0</span>
           </button>

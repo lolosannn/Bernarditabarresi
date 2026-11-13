@@ -17,6 +17,7 @@ y entrá a `http://localhost:8000`.
 | Página | Archivo |
 |---|---|
 | Inicio | `index.html` |
+| Colección (por categoría) | `coleccion.html` |
 | Promociones (catálogo) | `mujer.html` |
 | Ficha de producto | `producto.html?slug=<id>` (ids en `assets/js/products.js`) |
 | Sobre Nosotros | `sobre-nosotros.html` (`quienes-somos.html` redirige acá) |

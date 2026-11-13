@@ -16,7 +16,7 @@
 <main>
   <div class="container">
     <nav class="breadcrumb">
-      <a href="index.html">Inicio</a> &gt; <a href="mujer.html">Promociones</a> &gt; <span id="crumb-name">Producto</span>
+      <a href="index.html">Inicio</a> &gt; <a href="coleccion.html">Colección</a> &gt; <span id="crumb-name">Producto</span>
     </nav>
   </div>
 
@@ -44,7 +44,7 @@
 <script src="assets/js/cart.js"></script>
 <script src="assets/js/layout.js"></script>
 <script>
-  renderHeader("mujer");
+  renderHeader("coleccion");
   renderFooter();
 
   const params = new URLSearchParams(window.location.search);
@@ -67,7 +67,7 @@
       </div>
       <div>
         <div class="product-title-row">
-          <span class="eyebrow">${product.category}</span>
+          <span class="eyebrow">${categoryLabel(product.category)}</span>
           <h1>${product.name}</h1>
         </div>
         ${hasPrice(product) ? `

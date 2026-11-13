@@ -108,7 +108,7 @@ function renderCartDrawer() {
   const items = getCart();
 
   if (items.length === 0) {
-    itemsEl.innerHTML = `<div class="cart-empty">Tu carrito está vacío.<br><br><a class="btn btn-secondary" href="mujer.html">Ver colección</a></div>`;
+    itemsEl.innerHTML = `<div class="cart-empty">Tu carrito está vacío.<br><br><a class="btn btn-secondary" href="coleccion.html">Ver colección</a></div>`;
     footerEl.innerHTML = "";
     return;
   }

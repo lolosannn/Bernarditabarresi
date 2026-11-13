@@ -411,6 +411,24 @@ const PRODUCTS = [
   },
 ];
 
+/* Categorías del catálogo, en el orden en que se muestran. Una categoría sin
+   productos no aparece ni en Colección ni en los filtros. */
+const CATEGORIES = [
+  { key: "sandalias", label: "Sandalias", description: "Chatas o con taco bajo, para los días de calor." },
+  { key: "chatas", label: "Chatas", description: "Cómodas y elegantes, para usar todos los días." },
+  { key: "guillerminas", label: "Guillerminas", description: "Con pulsera al tobillo, entre lo clásico y lo artesanal." },
+  { key: "botas", label: "Botas", description: "Para el otoño y el invierno." },
+];
+
+function categoriesWithProducts() {
+  return CATEGORIES.filter((c) => PRODUCTS.some((p) => p.category === c.key));
+}
+
+function categoryLabel(key) {
+  const c = CATEGORIES.find((c) => c.key === key);
+  return c ? c.label : key;
+}
+
 function formatPrice(value) {
   return "$" + value.toLocaleString("es-AR");
 }
